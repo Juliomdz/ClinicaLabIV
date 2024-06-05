@@ -1,0 +1,76 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+$font: 'Montserrat', sans-serif;
+
+.main {
+    font-family: $font;
+    position: absolute;
+    width: 360px;
+    height: 500px;
+    background-color: #228364;
+    margin-left: 30%;
+    border-radius: 10px;
+    right: -80%;
+    top: -0%;
+    color: #fff;
+    padding: 1rem;
+    border: 3px solid #fff;
+    padding-top: 0px;
+    box-shadow: 2px 2px 4px #000;
+    overflow: scroll;
+  }
+  
+  .main::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-list {
+    border: 1px solid #ffffff;
+    padding: 5px;
+  }
+  
+  ul {
+    list-style-type: style type none;;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 1px;
+  }
+  
+  .btn {
+    padding: 1;
+    background: transparent;
+    border: 1px groove rgba(0, 0, 0, 0.315);
+    border-radius: 0;
+    text-align: left;
+    margin-top: 0;
+    height: 20px;
+  }
+  
+  .btn:hover {
+    background-color: #61d7b2;
+  }
+  
+  .icono{
+    height: 50px;
+  }
+  
+  .btn-lista{
+    color: #fff;
+    padding: 1;
+    width: 100%;
+    background: transparent;
+    border: 1px groove rgb(0, 0, 0);
+    border-radius: 0;
+    text-align: left;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+  }
+  
+  .btn-lista:hover{
+    background-color: #61d7b2;
+  }

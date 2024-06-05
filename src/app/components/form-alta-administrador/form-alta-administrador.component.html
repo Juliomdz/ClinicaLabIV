@@ -1,0 +1,130 @@
+<form [formGroup]="formAdministrador" class="contenedor-form" (ngSubmit)="Registrar()">
+    <h2>REGISTRO DE ADMINISTRADOR</h2>
+
+    <div class="row">
+        <div class="col-sm mb-3">
+
+            <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre"
+                style="width: 100%;" />
+            <small class="mensaje-error" *ngIf="
+          formAdministrador.get('nombre')?.invalid &&
+          formAdministrador.get('nombre')?.touched &&
+          formAdministrador.get('nombre')?.errors?.['pattern']">
+                *Ingrese solo letras
+            </small>
+            <small class="mensaje-error" *ngIf="
+          formAdministrador.get('nombre')?.errors?.['required'] &&
+          formAdministrador.get('nombre')?.touched">
+                *El nombre es obligatorio
+            </small>
+        </div>
+        <div class="col-sm mb-3">
+            <input formControlName="apellido" type="text" class="form-control" id="apellido" placeholder="Apellido" />
+            <small class="mensaje-error" *ngIf="
+      formAdministrador.get('apellido')?.invalid &&
+      formAdministrador.get('apellido')?.touched &&
+      formAdministrador.get('apellido')?.errors?.['pattern']">
+                *Ingrese solo letras
+            </small>
+            <small class="mensaje-error" *ngIf="
+      formAdministrador.get('apellido')?.errors?.['required'] &&
+      formAdministrador.get('apellido')?.touched">
+                *El apellido es obligatorio
+            </small>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm mb-3">
+            <input formControlName="edad" type="number" class="form-control" placeholder="Edad" min="18" max="99" />
+            <small class="mensaje-error"
+                *ngIf="formAdministrador.controls['edad'].errors?.['required'] && formAdministrador.controls['edad'].touched">
+                *La edad es obligatoria
+            </small>
+            <small class="mensaje-error"
+                *ngIf="formAdministrador.controls['edad'].errors?.['min'] || (formAdministrador.controls['edad'].errors?.['max'] && formAdministrador.controls['edad'].touched)">
+                *Debe ser entre 18 y 99 años
+            </small>
+        </div>
+        <div class="col-sm mb-3">
+            <input formControlName="dni" type="number" class="form-control" placeholder="N° DNI" min="11111111"
+                max="99999999" />
+            <small class="mensaje-error" *ngIf="
+        formAdministrador.controls['dni'].errors?.['required'] &&
+        formAdministrador.controls['dni'].touched">
+                *El DNI es obligatorio
+            </small>
+            <small class="mensaje-error"
+                *ngIf="formAdministrador.controls['dni'].errors?.['min'] || (formAdministrador.controls['dni'].errors?.['max'] && formAdministrador.controls['dni'].touched)">
+                *Ingrese un DNI válido
+            </small>
+        </div>
+    </div>
+    <div>
+        <div class="col-sm mb-3">
+
+            <input formControlName="email" type="email" class="form-control" placeholder="Correo electrónico" />
+            <small class="mensaje-error"
+                *ngIf="formAdministrador.controls['email'].errors?.['required'] && formAdministrador.controls['email'].touched">
+                *El correo eléctronico es obligatorio
+            </small>
+        </div>
+
+        <div class="col-sm mb-3">
+            <input formControlName="clave" type="password" class="form-control" placeholder="Contraseña" pattern=".{6,}"
+                title="Debe tener como mínimo 6 caracteres" />
+            <small class="mensaje-error" *ngIf="
+          formAdministrador.controls['clave'].errors?.['required'] &&
+          formAdministrador.controls['clave'].touched
+        ">
+                *La contraseña es obligatoria
+            </small>
+            <small class="mensaje-error" *ngIf="
+          formAdministrador.controls['clave'].errors?.['pattern'] &&
+          formAdministrador.controls['clave'].touched
+        ">
+                *Debe tener como mínimo 6 caracteres
+            </small>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm">
+                <label for="file" style="font-size: 20px">Ingrese 1 imágen</label>
+                <input type="file" id="fileInput" name="foto" accept="image/*" multiple
+                    (change)="handleFileInputChange($event)" class="form-control text-success" formControlName="foto"
+                    required />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col col-6">
+              <p class="captcha">
+                {{ captcha }}
+              </p>
+            </div>
+            <div class="col-sm">
+              <label for="captcha" class="form-label">Complete el Captcha</label>
+              <input type="text" class="form-control" id="captcha" formControlName="captcha" placeholder="Captcha" />
+              <small class="mensaje-error" *ngIf="
+                      formAdministrador.controls['captcha'].errors?.['required'] &&
+                      formAdministrador.controls['captcha'].touched
+                    ">
+                *El Captcha es obligatoria
+              </small>
+            </div>
+          </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button class="btn col-6" type="submit">Registrar</button>
+    </div>
+</form>
+<div class="overlay" *ngIf="loading">
+    <div class="heartbeatloader">
+      <svg class="svgdraw" width="100%" height="100%" viewBox="0 0 150 400" xmlns="http://www.w3.org/2000/svg">
+        <path class="path"
+          d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0"
+          fill="transparent" stroke-width="4" stroke="black"></path>
+      </svg>
+      <div class="innercircle"></div>
+      <div class="outercircle"></div>
+    </div>
+  </div>

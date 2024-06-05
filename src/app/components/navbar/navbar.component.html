@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home']">
+            <img src="../../../assets/favicon.png" alt="Favicon" class="favicon d-inline-block align-text-top"
+                style="height: 50px; padding-right: 10px;">
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" [routerLink]="['/home']">
+                    <button class="btn-nav">Inicio</button>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="usuario?.perfil == 'Administrador'">
+                <a class="nav-link active" aria-current="page" [routerLink]="['/usuarios']">
+                    <button class="btn-nav">Usuarios</button>
+                </a>
+            </li>
+        </ul>
+        <button *ngIf="!usuario" class="btn-login" [routerLink]="['auth/login']">Iniciar Sesión</button>
+        <button *ngIf="!usuario" class="btn-registro" [routerLink]="['auth/register']">Registro</button>
+        <span class="userInfo" *ngIf="this.authService.seLogueo">
+            <div class="user-info-content">
+              <img class="img-btn" src="{{ usuario?.fotos[0] }}" alt="usuario" />
+              <div class="user-info-details">
+                <p class="user-info-name">
+                  {{ usuario?.nombre }} {{ usuario?.apellido }}
+                </p>
+                <button type="button" (click)="CerrarSesion()" class="btn-logout">
+                  Cerrar Sesión
+                </button>
+              </div>
+            </div>
+          </span>
+    </div>
+</nav>
+
+<section>
+    <ng-content select="router-outlet"></ng-content>
+</section>

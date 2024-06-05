@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+$font: "Lato", sans-serif;
+
+.navbar {
+  background-color: #1e8061;
+  z-index: 1000;
+  font-family: $font;
+}
+
+.btn-nav {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  border: none;
+  background: none;
+  font-weight: 300;
+  font-family: $font;
+}
+
+.btn-nav::before {
+  margin-left: auto;
+}
+
+.btn-nav::after,
+.btn-nav::before {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #a8dadc;
+  display: block;
+  transition: 0.5s;
+}
+
+.btn-nav:hover::after,
+.btn-nav:hover::before {
+  width: 100%;
+}
+
+.btn-login {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-family: $font;
+  }
+  
+  .btn-login::before {
+    margin-left: auto;
+  }
+  
+  .btn-login::after,
+  .btn-login::before {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: #F18F01;
+    display: block;
+    transition: 0.5s;
+  }
+  
+  .btn-login:hover::after,
+  .btn-login:hover::before {
+    width: 100%;
+  }
+
+  .btn-registro {
+    margin-left: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-family: $font;
+  }
+  
+  .btn-registro::before {
+    margin-left: auto;
+  }
+  
+  .btn-registro::after,
+  .btn-registro::before {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background:antiquewhite;
+    display: block;
+    transition: 0.5s;
+  }
+  
+  .btn-registro:hover::after,
+  .btn-registro:hover::before {
+    width: 100%;
+  }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: bolder;
+  }
+  
+  .user-info-name {
+    color: #fff;
+    font-weight: bolder;
+    margin-top: 10px;
+  }
+  
+  .img-btn {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .user-info-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-logout {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-family: $font;
+    padding-left: 2rem;
+  }
+  
+  .btn-logout::before {
+    margin-left: auto;
+  }
+  
+  .btn-logout::after,
+  .btn-logout::before {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: red;
+    display: block;
+    transition: 0.5s;
+  }
+  
+  .btn-logout:hover::after,
+  .btn-logout:hover::before {
+    width: 100%;
+  }

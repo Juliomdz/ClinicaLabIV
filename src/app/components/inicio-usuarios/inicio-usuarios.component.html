@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="card slide-in-fwd-top" style="width: 23rem;">
+      <div class="card-body">
+        <h4 class="card-title text-center">Inicio Rápido</h4>
+        <div class="d-flex flex-wrap">
+            <div class="flex-column" style="flex: 2;">
+                <label style="font-size: 15px; margin-top: 20px;" class="tituloEspecialidad">PACIENTES</label>
+                <div class="d-flex flex-wrap">
+                    <div *ngFor="let usuario of listaUsuarios?.pacientes" class="user-button">
+                        <button class="user-button-nuevo" (click)="clickListado(usuario)">
+                            <img src="{{ usuario.fotos }}" alt="Imagen de usuario" class="user-image">
+                        </button>
+                        <label class="user-name">{{ usuario.nombre }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column" style="flex: 2;">
+            <label  style="font-size: 15px; margin-top: 30px;" class="tituloEspecialidad text-center">ESPECIALISTAS</label>
+            <div class="d-flex flex-wrap">
+                <div *ngFor="let usuario of listaUsuarios?.especialistas" class="user-button">
+                    <button class="user-button-nuevo" (click)="clickListado(usuario)">
+                        <img src="{{ usuario.fotos }}" alt="Imagen de usuario" class="user-image">
+                    </button>
+                    <label class="user-name">{{ usuario.nombre }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column" style="flex: 2;">
+            <label  style="font-size: 15px; margin-top: 30px;" class="tituloEspecialidad">ADMINISTRADORES</label>
+            <div class="d-flex flex-wrap">
+                <div *ngFor="let usuario of listaUsuarios?.admins" class="user-button">
+                    <button class="user-button-nuevo" (click)="clickListado(usuario)">
+                        <img src="{{ usuario.fotos }}" alt="Imagen de usuario" class="user-image">
+                    </button>
+                    <label class="user-name">{{ usuario.nombre }}</label>
+                </div>
+            </div>
+        </div>
+</div>

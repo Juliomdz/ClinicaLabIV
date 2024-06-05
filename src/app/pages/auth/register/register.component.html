@@ -1,0 +1,33 @@
+<div class="background-image">
+  <div class="container swing-in-top-fwd" *ngIf="!formEspecialista && !formPaciente">
+    <button class="btn transUp" (click)="MostrarFormPaciente()">
+      <h2>Paciente</h2>
+      <img src="../../../../assets/iconos/paciente.png" alt="Paciente" class="img-fluid" />
+    </button>
+    <button class="btn transUp" (click)="MostrarFormEspecialista()">
+      <h2>Especialista</h2>
+      <img src="../../../../assets/iconos/especialista.png" alt="especialista" class="img-fluid" />
+    </button>
+  </div>
+</div>
+
+<div class="registro-paciente" *ngIf="formPaciente">
+  <button class="btn-volver" (click)="MostrarOpcionesRegistro()">Volver</button>
+  <app-form-alta-paciente></app-form-alta-paciente>
+</div>
+<div class="registro-especialista" *ngIf="formEspecialista">
+  <button class="btn-volver" (click)="MostrarOpcionesRegistro()">Volver</button>
+  <app-form-alta-especialista></app-form-alta-especialista>
+</div>
+
+<div class="overlay" *ngIf="loading">
+  <div class="heartbeatloader">
+    <svg class="svgdraw" width="100%" height="100%" viewBox="0 0 150 400" xmlns="http://www.w3.org/2000/svg">
+      <path class="path"
+        d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0"
+        fill="transparent" stroke-width="4" stroke="black"></path>
+    </svg>
+    <div class="innercircle"></div>
+    <div class="outercircle"></div>
+  </div>
+</div>
