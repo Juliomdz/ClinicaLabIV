@@ -15,51 +15,89 @@ $font: 'Montserrat', sans-serif;
     position: fixed;
 }
 
-.container-inicio-rapido {
-  position: fixed;
-  z-index: 5;
+
+.perfil-usuario,
+.perfil-especialista {
+    background-color: #699192;
+    font-family: $font;
+    position: absolute;
+    width: 65vw;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  transform: translateX(10rem);
+.img-perfil {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    background: #3b8185;
+    border: 2px solid black;
 }
 
-.card{
-  margin-top: 9rem;
-  background-color: #F1FAEE;
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+h3 {
+    font-family: $font;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #F1FAEE;
+    font-weight: bolder;
+    font-size: 2rem;
+    text-transform: capitalize;
+  }
+
+label {
+    color: #171717;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-.btn {
-  border-radius: 8px;
-  color: #f1faee;
-  background-color: #22b687;
-  transition: all 0.3s ease 0s;
+p {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #F1FAEE;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
-.btn:hover {
-  background-color: #f18f01;
-  box-shadow: 0px 15px 20px #f1910191;
-  color: white;
-  transform: translateY(-7px);
+.btn-especialidad {
+    width: fit-content;
+    background: #F18F01;
+    color: #F1FAEE;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    transition: 0.4s;
 }
 
-.btn:active {
-  transform: translateY(-1px);
+.btn-especialidad:hover {
+    transition: 0.4s;
+    background: #0277d0;
+    box-shadow: 2px 2px 4px #000;
 }
 
-.mensaje-error{
-  color: rgb(115, 7, 7);
-  border-radius: 5px;
-  font-weight: bolder;
-  font-size: small;
+.especialidades {
+    display: flex;
+    flex-direction: column;
 }
 
-.slide-in-fwd-top{-webkit-animation:slide-in-fwd-top 1.3s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-fwd-top 1.3s cubic-bezier(.25,.46,.45,.94) both}
-@-webkit-keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}@keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}
+.dias-contenedor {
+    button {
+        width: 8rem;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+    }
+}
+
+.form-control{
+    width: fit-content;
+}
 
 /* heart beat */
 .overlay {
@@ -68,12 +106,11 @@ $font: 'Montserrat', sans-serif;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-  }
+    z-index: 100000;
+}
 
 .heartbeatloader {
     width: 10vmin;
@@ -84,9 +121,9 @@ $font: 'Montserrat', sans-serif;
     left: 0;
     right: 0;
     bottom: 0;
-  }
-  
-  .svgdraw {
+}
+
+.svgdraw {
     top: 30%;
     left: 26%;
     position: absolute;
@@ -94,9 +131,9 @@ $font: 'Montserrat', sans-serif;
     height: 50%;
     transform: scale(1.4);
     z-index: 3;
-  }
-  
-  .path {
+}
+
+.path {
     stroke: rgba(0, 0, 0, 0.95);
     stroke-width: 4;
     stroke-dasharray: 1000px;
@@ -104,15 +141,15 @@ $font: 'Montserrat', sans-serif;
     animation: draw 1.5s infinite forwards normal linear;
     animation-delay: 0.1s;
     position: relative;
-  }
-  
-  @keyframes draw {
+}
+
+@keyframes draw {
     to {
-      stroke-dashoffset: 0;
+        stroke-dashoffset: 0;
     }
-  }
-  
-  .innercircle {
+}
+
+.innercircle {
     position: absolute;
     top: 17%;
     left: 100.5%;
@@ -122,10 +159,10 @@ $font: 'Montserrat', sans-serif;
     z-index: 1;
     opacity: 0.97;
     animation: innerbeat 1.5s infinite linear forwards;
-  }
-  
-  .innercircle:before,
-  .innercircle:after {
+}
+
+.innercircle:before,
+.innercircle:after {
     position: absolute;
     content: "";
     left: 25%;
@@ -137,37 +174,37 @@ $font: 'Montserrat', sans-serif;
     border-radius: 50px 50px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
-  }
-  
-  .innercircle:after {
+}
+
+.innercircle:after {
     left: 0;
     transform: rotate(45deg);
     transform-origin: 100% 100%;
-  }
-  
-  @keyframes innerbeat {
+}
+
+@keyframes innerbeat {
     0% {
-      transform: translate(-50%, -50%) scale(1.2);
+        transform: translate(-50%, -50%) scale(1.2);
     }
-  
+
     10% {
-      transform: translate(-50%, -50%) scale(1.2);
+        transform: translate(-50%, -50%) scale(1.2);
     }
-  
+
     50% {
-      transform: translate(-50%, -50%) scale(1.3);
+        transform: translate(-50%, -50%) scale(1.3);
     }
-  
+
     60% {
-      transform: translate(-50%, -50%) scale(1.25);
+        transform: translate(-50%, -50%) scale(1.25);
     }
-  
+
     75% {
-      transform: translate(-50%, -50%) scale(1.3);
+        transform: translate(-50%, -50%) scale(1.3);
     }
-  }
-  
-  .outercircle {
+}
+
+.outercircle {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -180,26 +217,26 @@ $font: 'Montserrat', sans-serif;
     left: 0;
     transform: scale(1.2);
     animation: outerbeat 1.5s infinite linear forwards;
-  }
-  
-  @keyframes outerbeat {
+}
+
+@keyframes outerbeat {
     0% {
-      transform: scale(1.2);
+        transform: scale(1.2);
     }
-  
+
     10% {
-      transform: scale(1.2);
+        transform: scale(1.2);
     }
-  
+
     50% {
-      transform: scale(1.3);
+        transform: scale(1.3);
     }
-  
+
     60% {
-      transform: scale(1.25);
+        transform: scale(1.25);
     }
-  
+
     75% {
-      transform: scale(1.3);
+        transform: scale(1.3);
     }
-  }
+}

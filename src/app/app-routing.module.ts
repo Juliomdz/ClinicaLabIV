@@ -9,11 +9,16 @@ const routes: Routes = [
   },
   {
     path:"",
-    loadChildren:() => import('./pages/home/home.module').then(m => m.HomeModule)
+    loadChildren:() => import('./pages/home/home.module').then(m => m.HomeModule),
+    data:{animation:'Home'}
   },
   {
     path:"auth",
     loadChildren:() => import('./pages/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path:"turnos",
+    loadChildren:() => import('./pages/turnos/turnos.module').then(m => m.TurnosModule)
   },
 ];
 

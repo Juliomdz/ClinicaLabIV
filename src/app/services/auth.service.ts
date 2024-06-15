@@ -14,14 +14,13 @@ export class AuthService {
   user$: any;
   esAdmin: boolean = false;
   esPaciente:boolean = false;
-  esEspecilista:boolean = false;
+  esEspecialista:boolean = false;
   seLogueo: boolean = false;
   usuarioLogueado: any;
 
   constructor(
     private angularFirestore: AngularFirestore,
     private swal: SwalService,
-    private router: Router,
     private afAuth: AngularFireAuth) 
     {
     this.user$ = this.afAuth.authState.pipe(
@@ -88,7 +87,7 @@ export class AuthService {
       this.afAuth.signOut().then(() =>{
         this.seLogueo = false;
         this.esAdmin = false;
-        this.esEspecilista = false;
+        this.esEspecialista = false;
         this.esPaciente = false;
       }).catch((error) => {
         this.swal.MostrarError("¡ERROR!",this.ObtenerMensajeError(error.errorCode))
@@ -129,4 +128,9 @@ export class AuthService {
       }
       return mensaje;
     } 
+
+    ObtenerAuthState()
+    {
+      return this.afAuth.authState
+    }
 }

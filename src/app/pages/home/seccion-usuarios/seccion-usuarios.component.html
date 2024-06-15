@@ -46,6 +46,10 @@
     REGISTRAR USUARIO
 </button>
 
+<button class="btn-habilitar btn-excel" *ngIf="!createrUserMenu" (click)="descargarExcel()">
+    Descargar Excel
+  </button>
+
 <button class="btn-menu-volver" *ngIf="createrUserMenu" (click)="showUserList()">
     VOLVER AL LISTADO DE USUARIOS
 </button>

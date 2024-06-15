@@ -204,6 +204,26 @@ $font: 'Montserrat', sans-serif;
   transition: 0.4s;
 }
 
+.btn-excel {
+  font-family: 'Raleway', sans-serif;
+  width: 22rem;
+  position: absolute;
+  z-index: 200;
+  top: 18%;
+  right: 5.9%;
+  height: 3rem;
+  border: solid 2px #F1FAEE;
+  background-color: #0B6E4F;
+  transition: 0.4s;
+  color: #F1FAEE;
+}
+
+.btn-excel:hover{
+  background-color: #61d7b2;
+  color: #000;
+  transition: 0.4s;
+}
+
 .btn-menu-volver {
   font-family: $font;
   width: 22rem;

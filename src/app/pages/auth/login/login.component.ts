@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit{
         if (!data.user.emailVerified) {
           this.swal.MostrarAdvertencia("ADVERTENCIA","¡Debe verificar su correo electrónico antes de poder ingresar!");
           this.authService.Logout();
-          this.authService.seLogueo = false;
           this.loading = false;
         }
         else
@@ -102,7 +101,6 @@ export class LoginComponent implements OnInit{
 
   ReciboUnUsuario($event:any)
   {
-    console.info($event)
     this.formUsuario.patchValue({
       email: $event.email,
       clave:$event.password

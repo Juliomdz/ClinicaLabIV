@@ -9,6 +9,8 @@ import { environment } from 'environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { ComponentsModule } from './components/components.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,17 @@ import { ComponentsModule } from './components/components.module';
   ],
   imports: [
     ComponentsModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

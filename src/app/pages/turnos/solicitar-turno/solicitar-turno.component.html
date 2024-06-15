@@ -1,0 +1,74 @@
+<div class="overlay" *ngIf="loading">
+    <div class="heartbeatloader">
+        <svg class="svgdraw" width="100%" height="100%" viewBox="0 0 150 400" xmlns="http://www.w3.org/2000/svg">
+            <path class="path"
+                d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0"
+                fill="transparent" stroke-width="4" stroke="black"></path>
+        </svg>
+        <div class="innercircle"></div>
+        <div class="outercircle"></div>
+    </div>
+</div>
+<div *ngIf="authService.seLogueo">
+    <div class="solicitar-turno">
+        <div *ngIf="patientSelectionMenu">
+            <h3>PACIENTES</h3>
+            <div class="row" style="overflow-x: scroll">
+                <div class="col carta-especialista mb-2" *ngFor="let pac of pacientesList" (click)="MostrarPaciente(pac)">
+                    <p>{{ pac.nombre }} - {{ pac.apellido }}</p>
+                    <img [src]="pac?.fotos[0]" style="width: 15rem; height: 15rem; display: flex; justify-content: center; border-radius: 50%;">
+                </div>
+            </div>
+        </div>
+
+        <div class="contenedor-especialistas" *ngIf="specialistSelectionMenu && !patientSelectionMenu">
+            <h3>ESPECIALISTAS</h3>
+            <div class="contenedor-carta-esp" style="display: flex; justify-content: center">
+                <div *ngFor="let esp of especialistasList" (click)="MostrarEspecialista(esp)">
+                    <div>
+                        <p style="text-align: center; font-size: 2rem; color: #F18F01;">
+                            {{ esp.nombre }} - {{ esp.apellido }}
+                        </p>
+                        <img class="carta-especialista" style="width: 15rem; height: 15rem; display: flex; justify-content: center;" 
+                            src="{{ esp.fotos[0] }}"alt="imagen"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="activeEspecialista && !turnsSelectionMenu">
+            <h3>ESPECIALIDADES</h3>
+            <div class="row">
+                <div class="col" *ngFor="let especialidad of activeEspecialista.especialidad">
+                    <button class="especialidades" (click)="showTurns(especialidad)">{{especialidad.nombre}}</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="turnsSelectionMenu">
+            <h3>SELECCIÓN DE TURNO</h3>
+            <div class="row">
+                <div class="col carta-turno">
+                    <img src="{{ activeEspecialista.fotos[0] }}" alt="imagen" />
+                    <h1 class="especialista-activo">
+                        {{ activeEspecialista.nombre }} - {{ activeEspecialista.apellido }}
+                    </h1>
+                    <h1 class="especialista-activo">{{ speciality.nombre }}</h1>
+                </div>
+                <div class="col turnos-desk" style="overflow-y: scroll; height: 35rem">
+                    <button class="btn btn-turnos" style=" text-transform: uppercase; margin-left: 0.5rem; margin-right: 0.5rem; margin-bottom: 0.5rem; width: 150px;height: 150px;" *ngFor="let turno of turnosAMostrar" (click)="SeleccionarTurno(turno)">
+                        <p style="font-size: 15px;">{{ turno.fecha | dayWithHour}}</p>
+                    </button>
+                    <br />
+                    <p *ngIf="diasAMostrar.length == 0" style="text-align: center">
+                        No hay turnos disponibles
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button *ngIf="botonPedirTurno" class="btn btn-primary" style="margin-top: 1rem; width: 100%"
+            (click)="SolicitarTurno()">
+            Solicitar Turno
+        </button>
+    </div>
+</div>
+<div class="solicitar-turno-container"></div>

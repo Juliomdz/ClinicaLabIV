@@ -1,0 +1,133 @@
+<div class="background-image"></div>
+<div class="overlay" *ngIf="loading">
+    <div class="heartbeatloader">
+        <svg class="svgdraw" width="100%" height="100%" viewBox="0 0 150 400" xmlns="http://www.w3.org/2000/svg">
+            <path class="path"
+                d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0"
+                fill="transparent" stroke-width="4" stroke="black"></path>
+        </svg>
+        <div class="innercircle"></div>
+        <div class="outercircle"></div>
+    </div>
+</div>
+<div class="perfil-usuario" *ngIf="authService.seLogueo">
+    <h3>Mi Perfil</h3>
+    <!-- PERFIL ADMINISTRADOR/ PACIENTE  -->
+    <div *ngIf="!esEspecialista">
+        <div style="display: flex; justify-content: center">
+            <img class="img-perfil" src="{{ usuario?.fotos[0] }}" alt="imagen 1" />
+            <img class="img-perfil" style="width: 5rem; height: 5rem" src="{{ usuario?.fotos[1] }}" alt="imagen 2"
+                *ngIf="esPaciente" />
+        </div>
+
+        <div class="row row-1" *ngIf="esPaciente">
+            <div class="col">
+                <label>Nombre</label>
+                <p>{{ usuario?.nombre }}</p>
+                <label>Apellido</label>
+                <p>{{ usuario?.apellido }}</p>
+                <label>Edad</label>
+                <p>{{ usuario?.edad }} años</p>
+                <label>DNI</label>
+                <p>{{ usuario?.dni }}</p>
+            </div>
+            <div class="col">
+                <label>Email</label>
+                <p>{{ usuario?.email }}</p>
+                <label>Obra Social</label>
+                <p>{{ usuario?.obraSocial }}</p>
+                <label>Tipo de Usuario</label>
+                <p>{{ usuario?.perfil }}</p>
+                <br />
+            </div>
+        </div>
+
+        <!-- PERFIL ADMINISTRADOR  -->
+        <div class="row justify-content-md-center" *ngIf="authService.esAdmin">
+            <div class="col">
+                <label>Nombre</label>
+                <p>{{ usuario?.nombre }}</p>
+                <label>Apellido</label>
+                <p>{{ usuario?.apellido }}</p>
+                <label>Edad</label>
+                <p>{{ usuario?.edad }} años</p>
+            </div>
+            <div class="col">
+                <label>DNI</label>
+                <p>{{ usuario?.dni }}</p>
+                <label>Email</label>
+                <p>{{ usuario?.email }}</p>
+                <label>Tipo de Usuario</label>
+                <p>{{ usuario?.perfil }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="perfil-especialista" *ngIf="authService.esEspecialista">
+    <h3>Mi Perfil</h3>
+    <!-- PERFIL ESPECIALISTA  -->
+    <div style="display: flex; justify-content: center">
+        <img class="img-perfil" src="{{ usuario?.fotos[0] }}" alt="imagen 1" />
+    </div>
+
+    <div class="row" *ngIf="esEspecialista">
+        <div class="col col-3">
+            <label>Nombre</label>
+            <p>{{ usuario?.nombre }}</p>
+            <label>Apellido</label>
+            <p>{{ usuario?.apellido }}</p>
+            <label>Edad</label>
+            <p>{{ usuario?.edad }} años</p>
+            <label>DNI</label>
+            <p>{{ usuario?.dni }}</p>
+        </div>
+        <div class="col col-4">
+            <label>Email</label>
+            <p>{{ usuario?.email }}</p>
+            <label>Especialidad/es</label>
+            <p>
+                <span *ngFor="let esp of usuario?.especialidad">{{ esp.nombre }}  </span> 
+            </p>
+
+            <label>Seleccione su Especialidad</label>
+            <div class="especialidades">
+                <button class="btn btn-especialidad" [ngClass]="especialidad1 ? 'btn-info' : ''" (click)="showTurnsOne()">
+                    {{ usuario?.especialidad[0]?.nombre }}
+                </button>
+                <button *ngIf="usuario?.especialidad[1]" class="btn btn-especialidad" [ngClass]="especialidad2 ? 'btn-info' : ''" (click)="showTurnsTwo()">
+                    {{ usuario?.especialidad[1].nombre }}
+                </button>
+            </div>
+            
+        </div>
+        <div class="col col-5 col-horarios">
+            <label>Mis Horarios</label>
+            <div class="dias-contenedor">
+                <button class="btn btn-success" [ngClass]="lunes ? 'btn-warning' : ''" (click)="addDay('lunes')">
+                    Lunes
+                </button>
+                <button class="btn btn-success" [ngClass]="martes ? 'btn-warning' : ''" (click)="addDay('martes')">
+                    Martes
+                </button>
+                <button class="btn btn-success" [ngClass]="miercoles ? 'btn-warning' : ''" (click)="addDay('miércoles')">
+                    Miércoles
+                </button>
+                <button class="btn btn-success" [ngClass]="jueves ? 'btn-warning' : ''" (click)="addDay('jueves')">
+                    Jueves
+                </button>
+                <button class="btn btn-success" [ngClass]="viernes ? 'btn-warning' : ''" (click)="addDay('viernes')">
+                    Viernes
+                </button>
+                <button class="btn btn-success" [ngClass]="sabado ? 'btn-warning' : ''" (click)="addDay('sábado')">
+                    Sábado
+                </button>
+            </div>
+            <label style="margin-top: 1rem; margin-bottom: 1rem">Duración de Turno (min)</label>
+            <input class="form-control" type="number" placeholder="30 Minutos" [(ngModel)]="duracionTurno" />
+            <button style="margin-top: 1rem" class="btn btn-success" (click)="updateUser()">
+                Guardar Cambios
+            </button>
+        </div>
+    </div>
+</div>

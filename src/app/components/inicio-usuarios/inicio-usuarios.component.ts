@@ -37,7 +37,6 @@ export class InicioUsuariosComponent implements OnInit {
         especialistas: especialistas.splice(0,2),
         admins: admins.splice(0,1),
       }
-      console.info(this.listaUsuarios)
     })
   }
 

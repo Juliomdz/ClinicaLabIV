@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-$font: 'Montserrat', sans-serif;
+$font: "Montserrat", sans-serif;
 
-.background-image {
+.turnos-container {
     font-family: $font;
     z-index: -1;
     top: 0;
@@ -13,53 +13,139 @@ $font: 'Montserrat', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
-}
+  }
+  
 
-.container-inicio-rapido {
-  position: fixed;
-  z-index: 5;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  transform: translateX(10rem);
-}
-
-.card{
-  margin-top: 9rem;
-  background-color: #F1FAEE;
+.turnos {
+  position: absolute;
+  overflow-y: scroll;
+  width: 90vw;
+  height: 80vh;
+  top: 18%;
+  left: 5%;
+  //   transform: translate(-50%, -50%);
+  z-index: 100;
+  padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #236c7d;
+  h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.534);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px #000;
+    font-weight: bolder;
+    font-family: $font;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    margin-bottom: 1rem;
+  }
+  label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  p {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
 }
 
-.btn {
-  border-radius: 8px;
-  color: #f1faee;
-  background-color: #22b687;
-  transition: all 0.3s ease 0s;
+.tabla-usuario {
+  font-family: Raleway, sans-serif;
+  height: 75%;
+  overflow-y: scroll;
+  z-index: 100;
+  left: 5%;
+  top: 18%;
+  background: #000;
+  color: #fff;
+  padding: 1rem;
+  background: #17444f;
+  border: 2px solid #fff;
+  box-shadow: 2px 2px 4px #000;
+  text-shadow: 1px 1px #000;
+  h3 {
+    text-align: center;
+  }
+  table {
+    color: #fff;
+    font-weight: 400;
+  }
 }
 
-.btn:hover {
-  background-color: #f18f01;
-  box-shadow: 0px 15px 20px #f1910191;
-  color: white;
-  transform: translateY(-7px);
+.tr-tabla:hover {
+  color: #fff;
+  background: #4b9a81;
+  transition: background 0.5s;
 }
 
-.btn:active {
-  transform: translateY(-1px);
+.btn-especialista:hover {
+  background: rgb(0, 0, 0);
+  box-shadow: 2px 2px 4px #000;
 }
 
-.mensaje-error{
-  color: rgb(115, 7, 7);
-  border-radius: 5px;
+.btn-cancelar{
+  color: #ffff;
+  background: #660101;
+  box-shadow: 2px 2px 4px #000;
+}
+.btn-cancelar:hover {
+  background: #ff0000;
+  box-shadow: 2px 2px 4px #000;
+}
+.btn-confirmar:hover {
+  background: #18e809;
+}
+
+.estado {
   font-weight: bolder;
-  font-size: small;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255, 255, 255);
+  background: #0071b3;
 }
 
-.slide-in-fwd-top{-webkit-animation:slide-in-fwd-top 1.3s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-fwd-top 1.3s cubic-bezier(.25,.46,.45,.94) both}
-@-webkit-keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}@keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}
+.input-busqueda {
+  width: 15rem;
+  border: 3px solid rgb(0, 119, 255);
+  border-radius: 10px;
+  height: 2rem;
+  padding-left: 1rem;
+  box-shadow: 2px 2px 4px #000;
+}
+
+.input-busqueda:focus {
+  border: 3px solid rgb(0, 119, 255);
+  box-shadow: 0 0 12px #0099ff;
+  transition: box-shadow 0.5s;
+}
+
+// RESPONSIVE
+
+@media screen and (max-width: 480px) {
+  .turnos-container {
+    min-height: 100vh;
+  }
+  .turnos {
+    overflow-y: scroll;
+    overflow-x: scroll;
+    width: 95vw;
+    height: 85vh;
+    top: 14%;
+    left: 2%;
+  }
+  .input-busqueda {
+    width: 10rem;
+    margin-bottom: 0.5rem;
+  }
+  .tabla-usuario {
+    width: 100%;
+  }
+}
 
 /* heart beat */
 .overlay {
@@ -74,8 +160,8 @@ $font: 'Montserrat', sans-serif;
     align-items: center;
     z-index: 1000;
   }
-
-.heartbeatloader {
+  
+  .heartbeatloader {
     width: 10vmin;
     height: 10vmin;
     position: absolute;

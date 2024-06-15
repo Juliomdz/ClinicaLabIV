@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
             this.authService.esPaciente = true;
             break;
           case "Especialista":
-            this.authService.esEspecilista = true;
+            this.authService.esEspecialista = true;
             break;
           case "Administrador":
             this.authService.esAdmin = true;

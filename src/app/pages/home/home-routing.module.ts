@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
 import { SeccionUsuariosComponent } from './seccion-usuarios/seccion-usuarios.component';
+import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path:'usuarios',
     component:SeccionUsuariosComponent
+  },
+  {
+    path:'perfil',
+    component:MiPerfilComponent
   },
   {
     path:"error",
