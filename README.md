@@ -21,35 +21,35 @@ administración de la misma".**
 
 # HOME
 
-![](resources/home.png)
+
 <p align="center">
   <img src="/resources/home.png">
 </p>
 
 # REGISTRO
 
-![](resources/registro.png)
+
 <p align="center">
   <img src="/resources/registro.png">
 </p>
 
 ## REGISTRO PACIENTE
 
-![](resources/registroPaciente.png)
+
 <p align="center">
   <img src="/resources/registroPaciente.png">
 </p>
 
 ## REGISTRO ESPECIALISTA
 
-![](resources/registroEspecialista.png)
+
 <p align="center">
   <img src="/resources/registroEspecialista.png">
 </p>
 
 # INICIAR SESIÓN
 
-![](resources/login.png)
+
 <p align="center">
   <img src="/resources/login.png">
 </p>
@@ -57,7 +57,6 @@ administración de la misma".**
 ## VISTA ADMINISTRADOR
 
 
-![](FotosReadme/vistaAdmin.png)
 <p align="center">
   <img src="/resources/vistaAdmin.png">
 </p>
@@ -65,7 +64,6 @@ administración de la misma".**
 ## Vista Paciente
 
 
-![](FotosReadme/vistaPaciente.png)
 <p align="center">
   <img src="/resources/vistaPaciente.png">
 </p>
@@ -73,7 +71,6 @@ administración de la misma".**
 ## Vista Especialista
 
 
-![](FotosReadme/vistaEspecialista.png)
 <p align="center">
-  <img src="src/resources/vistaEspecialista.png">
+  <img src="/resources/vistaEspecialista.png">
 </p>
