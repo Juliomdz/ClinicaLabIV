@@ -17,10 +17,12 @@ export class FormAltaPacienteComponent {
   imagenes:string[]
   loading:boolean = false
   nuevoPaciente = new Usuario()
-  captcha:string = ''
+  captcha:string = '';
+  captchaV2:string;
 
   constructor(private fb: FormBuilder,private swal:SwalService,private storageService:StorageService,private authService:AuthService) { 
     this.imagenes = [];
+    this.captchaV2 = '';
   }
 
   ngOnInit() {
@@ -33,16 +35,16 @@ export class FormAltaPacienteComponent {
       email: ['',[Validators.required,Validators.email]],
       clave: ['',[Validators.required,Validators.minLength(6)]],
       foto:['',Validators.required],
-      captcha:['',Validators.required]
+      captchaV2:['']
     });
 
-    this.captcha = this.GenerarCaptcha(6)
+    //this.captcha = this.GenerarCaptcha(6)
   }
 
   async Registrar() {
     if(this.formPaciente.valid && this.imagenes.length == 2)
     {
-      if(this.captcha.toLocaleLowerCase().trim() == this.formPaciente.getRawValue().captcha.toLocaleLowerCase().trim())
+      if(this.captchaV2 != '')
       {
         this.loading = true
 
@@ -64,12 +66,13 @@ export class FormAltaPacienteComponent {
         setTimeout(() => {
           this.loading = false;
           this.formPaciente.reset();
+          this.captchaV2 = '';
           this.nuevoPaciente = new Usuario();
         }, 2000);
       }
       else
       {
-        this.swal.MostrarError('ERROR','¡El captcha es incorrecto!');
+        this.swal.MostrarError('ERROR','¡Error en el captcha!');
       }
     }
     else {
@@ -100,16 +103,22 @@ export class FormAltaPacienteComponent {
     this.imagenes = [];
   }
 
-  GenerarCaptcha(num:number) :string
-  {
-    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let captchaRetorno = ' ';
-    const cantCaracteres = caracteres.length;
-    for (let i = 0; i < num; i++) {
-      captchaRetorno += caracteres.charAt(
-        Math.floor(Math.random() * cantCaracteres)
-      );
-    }
-    return captchaRetorno;
-  }
+  // GenerarCaptcha(num:number) :string
+  // {
+  //   const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //   let captchaRetorno = ' ';
+  //   const cantCaracteres = caracteres.length;
+  //   for (let i = 0; i < num; i++) {
+  //     captchaRetorno += caracteres.charAt(
+  //       Math.floor(Math.random() * cantCaracteres)
+  //     );
+  //   }
+  //   return captchaRetorno;
+  // }
+
+  resolved(captchaResponse: string) {
+    this.captchaV2 = captchaResponse;
+    console.log('resolved captcha with response: ' + this.captchaV2);
+}
+
 }

@@ -19,9 +19,11 @@ export class FormAltaEspecialistaComponent {
   nuevoEspecialista = new Usuario()
   loading = false;
   captcha:string = ''
+  captchaV2:string;
  
   constructor(private fb: FormBuilder,private swal:SwalService,private storageService:StorageService,private authService:AuthService) { 
     this.imagenes = [];
+    this.captchaV2 = '';
   }
 
 ngOnInit() {
@@ -34,16 +36,16 @@ ngOnInit() {
       email: ['',[Validators.required,Validators.email]],
       clave: ['',[Validators.required,Validators.minLength(6)]],
       foto:['',Validators.required],
-      captcha:['',Validators.required]
+      captchaV2:['']
     });
 
-    this.captcha = this.GenerarCaptcha(6)
+    //this.captcha = this.GenerarCaptcha(6)
   }
 
   async Registrar() {
     if(this.formEspecialista.valid && this.imagenes.length == 1)
     {
-      if(this.captcha.toLocaleLowerCase().trim() == this.formEspecialista.getRawValue().captcha.toLocaleLowerCase().trim())
+      if(this.captchaV2 != '')
       {
         this.loading = true
 
@@ -65,12 +67,13 @@ ngOnInit() {
         setTimeout(() => {
           this.loading = false;
           this.formEspecialista.reset();
+          this.captchaV2 = '';
           this.nuevoEspecialista = new Usuario();
         }, 2000);
       }
       else
       {
-        this.swal.MostrarError('ERROR','¡El captcha es incorrecto!');
+        this.swal.MostrarError('ERROR','¡Error en el captcha!');
       }
     }
     else {
@@ -122,4 +125,8 @@ ngOnInit() {
     }
     return captchaRetorno;
   }
+  resolved(captchaResponse: string) {
+    this.captchaV2 = captchaResponse;
+    console.log('resolved captcha with response: ' + this.captchaV2);
+}
 }

@@ -8,6 +8,7 @@ import { FormAltaAdministradorComponent } from './form-alta-administrador/form-a
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaEspecialidadesComponent } from './lista-especialidades/lista-especialidades.component';
 import { InicioUsuariosComponent } from './inicio-usuarios/inicio-usuarios.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { InicioUsuariosComponent } from './inicio-usuarios/inicio-usuarios.compo
   imports: [
     CommonModule,
     ComponentsRoutingModule,
+    RecaptchaModule,
     FormsModule,
+
     ReactiveFormsModule,
   ],
   exports:[

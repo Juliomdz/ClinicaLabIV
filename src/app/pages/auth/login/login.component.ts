@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit{
   loading:boolean = false
   //@ts-ignore
   formUsuario: FormGroup;
+  mostrarInicioRapido = false;
 
   constructor(private fb: FormBuilder,private swal:SwalService,private authService:AuthService,private firestoreService:FirestoreService,private router:Router) { }
 
@@ -97,6 +98,10 @@ export class LoginComponent implements OnInit{
       this.swal.MostrarError("ERROR","¡Asegurese de completar los campos correctamente!")
       this.loading = false;
     }
+  }
+
+  toggleInicioRapido() {
+    this.mostrarInicioRapido = !this.mostrarInicioRapido;
   }
 
   ReciboUnUsuario($event:any)

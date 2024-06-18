@@ -15,6 +15,28 @@ $font: 'Montserrat', sans-serif;
     position: fixed;
 }
 
+.fab {
+  position: fixed;
+  bottom: 20px;
+  left: 100px;
+  width: 65px;
+  height: 65px;
+  background-color: #00841d;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.fab:hover {
+  background-color: #e91e63;
+}
+
 .container-inicio-rapido {
   position: fixed;
   z-index: 5;
