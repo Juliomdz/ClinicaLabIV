@@ -132,8 +132,9 @@ $font: "Montserrat", sans-serif;
   font-family: $font;
   color: #F18F01;
   margin-bottom: 1rem;
+  margin-top: -2rem;
   text-transform: uppercase;
-  margin: 0 auto;
+  //margin: 0 auto;
   text-align: center;
 }
 
@@ -156,12 +157,12 @@ $font: "Montserrat", sans-serif;
   .contenedor-carta-esp {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 1rem;
+    margin-top: 5rem;
   }
 
   .carta-especialista {
     background: #236c7d;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
   }
 
   .especialidades {

@@ -90,9 +90,13 @@ export class MisTurnosComponent implements OnInit {
       this.pacientesDelEspecialista = [];
       this.auxPacientesDelEspecialista = [];
 
-      for (let i = 0; i < turns.length; i++) {
+      let turnsLength = turns?.length ?? 0;
+      let auxPacientesDelEspecialistaLength = this.auxPacientesDelEspecialista?.length ?? 0;
+      
+      for (let i = 0; i < turnsLength; i++) {
         const turnSpecialist = turns[i].turnos;
-        for (let j = 0; j < turnSpecialist.length; j++) {
+        let turnSpecialistLength = turnSpecialist?.length ?? 0;
+        for (let j = 0; j < turnSpecialistLength; j++) {
           const turn = turnSpecialist[j];
           if (turn.estado !== 'disponible') {
             this.turnList.push(turn);
@@ -107,7 +111,7 @@ export class MisTurnosComponent implements OnInit {
         }
       }
 
-      for (let i = 0; i < this.auxPacientesDelEspecialista.length; i++) {
+      for (let i = 0; i < auxPacientesDelEspecialistaLength; i++) {
         const paciente = this.auxPacientesDelEspecialista[i];
         const index = this.pacientesDelEspecialista.findIndex((p) => paciente.id === p.id);
         if (index === -1) {
@@ -154,7 +158,8 @@ export class MisTurnosComponent implements OnInit {
 
   aceptarTurno(turno: any) {
     turno.estado = 'aceptado';
-    for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+    let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+    for (let i = 0; i < currentSpecialistTurnListLength; i++) {
       const turnosEspecialista = this.currentSpecialistTurnList[i];
       const index = turnosEspecialista.turnos.findIndex((t: any) => {
         return (
@@ -201,7 +206,8 @@ export class MisTurnosComponent implements OnInit {
         turno.estado = 'rechazado';
       }
       turno.comentarioPaciente = this.comentarioCancelacion;
-      for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+      let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+      for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
         const index = turnosEspecialista.turnos.findIndex((t: any) => {
           return (
@@ -235,7 +241,8 @@ export class MisTurnosComponent implements OnInit {
   confirmarFinalizacion(turno: any) {
     turno.estado = 'realizado';
     turno.comentario = this.comentarioFinalizacion;
-    for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+    let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+    for (let i = 0; i < currentSpecialistTurnListLength; i++) {
       const turnosEspecialista = this.currentSpecialistTurnList[i];
       const index = turnosEspecialista.turnos.findIndex((t: any) => {
         return (
@@ -274,7 +281,8 @@ export class MisTurnosComponent implements OnInit {
       );
     } else {
       turno.comentarioPaciente = this.comentarioCalificacion;
-      for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+      let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+      for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
         const index = turnosEspecialista.turnos.findIndex((t: any) => {
           return (
@@ -320,7 +328,8 @@ export class MisTurnosComponent implements OnInit {
         turno.estado = 'rechazado';
       }
       turno.comentario = this.comentarioCancelacion;
-      for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+      let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+      for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
         const index = turnosEspecialista.turnos.findIndex((t: any) => {
           return (
@@ -351,7 +360,8 @@ export class MisTurnosComponent implements OnInit {
       this.turnosFiltrados = [...this.turnosDelPaciente];
     } else {
       const busqueda = this.palabraBusqueda.trim().toLocaleLowerCase();
-      for (let i = 0; i < this.turnosDelPaciente.length; i++) {
+      let turnosDelPacienteLength = this.turnosDelPaciente?.length ?? 0;
+      for (let i = 0; i < turnosDelPacienteLength; i++) {
         const turno = this.turnosDelPaciente[i];
         const fechaBusqueda = this.transformarFechaParaBusqueda(turno.fecha);
         if (
@@ -386,7 +396,8 @@ export class MisTurnosComponent implements OnInit {
       this.turnosFiltrados = [...this.turnosDelEspecialista];
     } else {
       const busqueda = this.palabraBusqueda.trim().toLocaleLowerCase();
-      for (let i = 0; i < this.turnosDelEspecialista.length; i++) {
+      let turnosDelEspecialistaLength = this.turnosDelEspecialista?.length ?? 0;
+      for (let i = 0; i < turnosDelEspecialistaLength; i++) {
         const turno = this.turnosDelEspecialista[i];
         const fechaBusqueda = this.transformarFechaParaBusqueda(turno.fecha);
         if (

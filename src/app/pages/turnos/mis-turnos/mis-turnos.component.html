@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="tr-tabla" style="cursor: pointer" *ngFor="let turn of turnosFiltrados">
+                    <tr class="tr-tabla" *ngFor="let turn of turnosFiltrados">
                         <td>{{ turn.fecha.seconds * 1000 | date: 'dd/MM/yyyy' }}</td>
                         <td>
                             {{ turn.especialista.apellido }} {{ turn.especialista.nombre }}

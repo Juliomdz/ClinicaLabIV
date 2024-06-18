@@ -14,7 +14,6 @@ $font: "Montserrat", sans-serif;
     background-size: cover;
     position: fixed;
   }
-  
 
 .turnos {
   position: absolute;
@@ -23,23 +22,17 @@ $font: "Montserrat", sans-serif;
   height: 80vh;
   top: 18%;
   left: 5%;
-  //   transform: translate(-50%, -50%);
   z-index: 100;
   padding: 1rem;
   border-radius: 1rem;
-  background: #236c7d;
+  background: #4b898b;
   h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.534);
-    padding: 10px;
-    border-radius: 20px;
-    box-shadow: 2px 2px 4px #000;
-    font-weight: bolder;
     font-family: $font;
-    text-shadow: 1px 1px 2px rgb(0, 0, 0);
-    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #F1FAEE;
+    font-weight: bolder;
+    font-size: 2rem;
   }
   label {
     font-size: 1.2rem;
@@ -54,25 +47,17 @@ $font: "Montserrat", sans-serif;
 }
 
 .tabla-usuario {
-  font-family: Raleway, sans-serif;
   height: 75%;
   overflow-y: scroll;
   z-index: 100;
   left: 5%;
   top: 18%;
-  background: #000;
-  color: #fff;
   padding: 1rem;
-  background: #17444f;
   border: 2px solid #fff;
   box-shadow: 2px 2px 4px #000;
   text-shadow: 1px 1px #000;
   h3 {
     text-align: center;
-  }
-  table {
-    color: #fff;
-    font-weight: 400;
   }
 }
 

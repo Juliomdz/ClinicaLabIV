@@ -41,7 +41,6 @@ $font: "Montserrat", sans-serif;
   }
   label {
     font-size: 1.2rem;
-    font-weight: bold;
   }
   p {
     font-size: 1rem;
@@ -64,15 +63,19 @@ $font: "Montserrat", sans-serif;
   h3 {
     text-align: center;
   }
-  table {
-    color: #fff;
-    font-weight: 400;
-  }
 }
 
 .table{
   --bs-table-bg:#F1FAEE;
   --bs-table-color:#0B6E4F;
+  --bs-table-border-color:black;
+  transition: 0.5s;
+}
+
+.table:hover{
+  --bs-table-bg:#F1FAEE;
+  --bs-table-color:#0B6E4F;
+  transition: 0.5s;
 }
 
 .tr-tabla:hover {
@@ -82,7 +85,7 @@ $font: "Montserrat", sans-serif;
 }
 
 .btn-aceptar{
-    background: #03a21e;
+  background: #03a21e;
   color: #ffff;
 }
 .btn-aceptar:hover {
@@ -117,12 +120,11 @@ $font: "Montserrat", sans-serif;
 }
 
 .estado {
-  font-weight: bolder;
   text-transform: uppercase;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid rgb(255, 255, 255);
-  background: #270c52;
+  background: #A8DADC;
 }
 
 .mensaje-error {

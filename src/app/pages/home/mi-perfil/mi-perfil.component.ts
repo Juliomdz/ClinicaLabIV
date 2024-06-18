@@ -294,7 +294,6 @@ export class MiPerfilComponent implements OnInit {
           );
         }
       );
-
       
       turno.turnos = [...this.turnosActuales.turnos];
       for (let i = 0; i < listaDeTurnos.length; i++) {
@@ -307,7 +306,6 @@ export class MiPerfilComponent implements OnInit {
     }
 
     this.authService.ActualizarUsuario(this.usuario);
-    
     this.swal.MostrarExito("EXITO","Horarios asignados correctamente");
   }
 

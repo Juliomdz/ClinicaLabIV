@@ -91,8 +91,9 @@ export class SolicitarTurnoComponent implements OnInit{
     });
 
     const aux: any[] = [];
+    let diasAMostrarLength = this.diasAMostrar?.length ?? 0;
     this.diasAMostrar.forEach((d) => {
-      for (let i = 0; i < this.diasAMostrar.length; i++) {
+      for (let i = 0; i < diasAMostrarLength; i++) {
         const fecha = this.diasAMostrar[i];
         if (
           d.getMonth() === fecha.getMonth() &&
@@ -112,38 +113,6 @@ export class SolicitarTurnoComponent implements OnInit{
     this.diasAMostrar = [...aux];
   }
 
-  loadFreeHoursOneDay(date: Date) {
-    this.loading = true;
-    this.turnosDeUnDiaAMostrar = [];
-    setTimeout(() => {
-      const currentDate = new Date();
-      const listaTurnosDelEspecialista = this.currentSpecialistTurnList.filter(
-        (t) => t.especialista.email == this.activeEspecialista.email
-      );
-      const turnosEspecialidad =
-        listaTurnosDelEspecialista[0].turnos.filter((t: any) => {
-          return (
-            t.especialidad == this.speciality.nombre &&
-            currentDate.getTime() < new Date(t.fecha.seconds * 1000).getTime()
-          );
-        });
-      const turnosDeUnDia: any[] = [];
-      for (let i = 0; i < turnosEspecialidad.length; i++) {
-        const turno = { ...turnosEspecialidad[i] };
-        if (
-          new Date(turno.fecha.seconds * 1000).getTime() <= currentDate.getTime() + 84600000 * 15 &&
-          new Date(turno.fecha.seconds * 1000).getDate() == date.getDate() && turno.estado == 'disponible'
-        ) {
-          turno.fecha = new Date(turno.fecha.seconds * 1000);
-          turnosDeUnDia.push(turno);
-        }
-      }
-      this.loading = false;
-      return this.turnosDeUnDiaAMostrar = [...turnosDeUnDia];
-    }, 500);
-  }
-
-
   loadFreeHours(day: string) {
     const currentDate = new Date();
     const listaTurnosDelEspecialista = this.currentSpecialistTurnList.filter(
@@ -156,9 +125,9 @@ export class SolicitarTurnoComponent implements OnInit{
           currentDate.getTime() < new Date(t.fecha.seconds * 1000).getTime()
         );
       });
-
+      let turnosEspecialidadLength = turnosEspecialidad?.length ?? 0;
     const turnos15dias: any[] = [];
-    for (let i = 0; i < turnosEspecialidad.length; i++) {
+    for (let i = 0; i < turnosEspecialidadLength; i++) {
       const turno = { ...turnosEspecialidad[i] };
       if (
         new Date(turno.fecha.seconds * 1000).getTime() <=
@@ -187,18 +156,24 @@ export class SolicitarTurnoComponent implements OnInit{
       this.turnoSeleccionado.paciente = this.activePaciente;
       this.turnoSeleccionado.estado = 'solicitado';
     }
+    console.log('159');
+    let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
 
-    for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+    for (let i = 0; i < currentSpecialistTurnListLength; i++) {
+      console.log('163');
+      console.log(this.turnoSeleccionado);
       const turnosEspecialista = this.currentSpecialistTurnList[i];
+      if (turnosEspecialista.turnos != undefined) {
       const index = turnosEspecialista.turnos.findIndex((t: any) => {
         return (
-          new Date(t.fecha.seconds * 1000).getTime() ==
+          //new Date(t.fecha.seconds * 1000).getTime() ==
           this.turnoSeleccionado.fecha.getTime() &&
           t.especialidad == this.turnoSeleccionado.especialidad
         );
       });
       turnosEspecialista.turnos[index] = this.turnoSeleccionado;
       this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+    }
     }
     this.turnosAMostrar = [];
     this.turnosDeUnDiaAMostrar = [];
