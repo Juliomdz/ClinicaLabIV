@@ -2,7 +2,7 @@
 
 
 
-    <div class="container-inicio-rapido" *ngIf="mostrarInicioRapido">
+    <div class="container-inicio-rapido slide-in-fwd-bottom" *ngIf="mostrarInicioRapido">
         <app-inicio-usuarios (usuarioClickeado)="ReciboUnUsuario($event)"></app-inicio-usuarios>
       </div>
     <div class="container">
@@ -53,7 +53,9 @@
                 </form>
             </div>
         </div>
-        <button class="fab" (click)="toggleInicioRapido()">+</button>
+
+            <button class="fab slide-in-fwd-bottom" (click)="toggleInicioRapido()">+</button>
+
     </div>
 
     <div class="overlay" *ngIf="loading">
