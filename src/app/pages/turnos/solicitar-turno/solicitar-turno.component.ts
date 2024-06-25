@@ -2,6 +2,8 @@ import { Component,OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { FirestoreService } from 'app/services/firestore.service';
 import { NotificationService } from 'app/services/notification.service';
+import { Router } from '@angular/router';
+import { SwalService } from 'app/services/swal.service';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -37,7 +39,9 @@ export class SolicitarTurnoComponent implements OnInit{
   constructor(
     public authService:AuthService,
     private firestoreService:FirestoreService,
-    private notificationService:NotificationService
+    private notificationService:NotificationService,
+    private router:Router,
+    private swal:SwalService
   ) 
   {}
   
@@ -180,6 +184,7 @@ export class SolicitarTurnoComponent implements OnInit{
     }
     console.log('159');
     let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+    let flagTurnoPedido:boolean = false;
 
     for (let i = 0; i < currentSpecialistTurnListLength; i++) {
       console.log('163');
@@ -195,16 +200,30 @@ export class SolicitarTurnoComponent implements OnInit{
       });
       turnosEspecialista.turnos[index] = this.turnoSeleccionado;
       this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+      flagTurnoPedido = true;
     }
     }
     this.turnosAMostrar = [];
     this.turnosDeUnDiaAMostrar = [];
     this.botonPedirTurno = false;
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      this.notificationService.showSuccess('Se ha solicitado el turno exitosamente', 'Turnos');
-      this.loadFreeHours('');
-    }, 1000);
+
+    if (flagTurnoPedido) {
+      this.swal.MostrarExito(
+        "EXITO",
+        'Se solicitó el turno correctamente. '
+      );
+      setTimeout(() => {
+        this.loading = false;
+        this.notificationService.showSuccess('Se ha solicitado el turno exitosamente', 'Turnos');
+        this.loadFreeHours('');
+      }, 1000); //REVISAR
+      this.router.navigate(['turnos/mis-turnos'])
+    } else {
+      this.swal.MostrarError(
+        "ERROR",
+        "Hubo un problema al solicitar el turno"
+      );
+    }
+    }
   }
-}
