@@ -25,10 +25,11 @@
             <h3>ESPECIALIDADES</h3>
             <div class="row">
                 <div class="col especialidades" *ngFor="let especialidad of listadoEspecialidades" (click)="MostrarEspecialista(especialidad)">
-                    <img *ngIf="especialidad.nombre == 'Endocrinología'" src="../../../../assets/iconos/endocrinology.png" alt="" />
-                    <img *ngIf="especialidad.nombre == 'Geriatría'" src="../../../../assets/iconos/geriatrics.png" alt="" />
-                    <img *ngIf="especialidad.nombre == 'Cardiología'" src="../../../../assets/iconos/cardiogram.png" alt="" />
-                    <img *ngIf="especialidad.nombre != 'Endocrinología' && especialidad.nombre != 'Geriatría' && especialidad.nombre != 'Cardiología'" src="../../../../assets/iconos/default.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Fisioterapia'" src="../../../../assets/iconos/Fisioteraphy.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Pediatria'" src="../../../../assets/iconos/pediatry.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Radiologia'" src="../../../../assets/iconos/radiology.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Cardiologia'" src="../../../../assets/iconos/cardiogram.png" alt="" />
+                    <img *ngIf="especialidad.nombre != 'Fisioterapia' && especialidad.nombre != 'Radiologia' && especialidad.nombre != 'Pediatria' && especialidad.nombre != 'Cardiologia'" src="../../../../assets/iconos/default.png" alt="" />
                 </div>
             </div>
         </div>
