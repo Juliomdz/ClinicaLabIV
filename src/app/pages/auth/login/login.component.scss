@@ -25,16 +25,17 @@ $font: 'Montserrat', sans-serif;
   border-radius: 50%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   color: white;
-  font-size: 24px;
+  font-size: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .fab:hover {
-  background-color: #e91e63;
+  background-color: #f46f27;
 }
 
 .container-inicio-rapido {

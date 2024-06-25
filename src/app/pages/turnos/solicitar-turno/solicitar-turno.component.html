@@ -59,7 +59,7 @@
                         <p style="font-size: 15px;">{{ turno.fecha | dayWithHour}}</p>
                     </button>
                     <br />
-                    <p *ngIf="diasAMostrar.length == 0" style="text-align: center">
+                    <p *ngIf="diasAMostrar?.length == 0" style="text-align: center">
                         No hay turnos disponibles
                     </p>
                 </div>

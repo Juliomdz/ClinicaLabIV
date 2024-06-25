@@ -66,12 +66,12 @@ export class ListaEspecialidadesComponent {
     const especialidadConNombre = { nombre: especialidad };
 
     if (!this.arrayEspecialidades.some((e) => e.nombre === especialidad)) {
-      if (this.arrayEspecialidades.length < 2) {
+      if (this.arrayEspecialidades?.length < 2) {
         this.arrayEspecialidades.push(especialidadConNombre);
         this.botonClickeado.emit(this.arrayEspecialidades);
       }
     } else {
-      const indice = this.arrayEspecialidades.findIndex((e) => e.nombre === especialidad);
+      const indice = this.arrayEspecialidades?.findIndex((e) => e.nombre === especialidad);
       this.arrayEspecialidades.splice(indice, 1);
       this.botonClickeado.emit(this.arrayEspecialidades);
     }

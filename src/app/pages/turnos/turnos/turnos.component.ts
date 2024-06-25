@@ -37,12 +37,17 @@ export class TurnosComponent {
     this.firestoreService.ObtenerListadoTurnos().subscribe((turns: any) => {
       this.currentSpecialistTurnList = turns;
       this.turnList = [];
-      for (let i = 0; i < turns.length; i++) {
+      let turnsLength = turns?.length ?? 0;
+      for (let i = 0; i < turnsLength; i++) {
         const turnSpecialist = turns[i].turnos;
-        for (let j = 0; j < turnSpecialist.length; j++) {
-          const turn = turnSpecialist[j];
-          if (turn.estado != 'disponible') {
-            this.turnList.push(turn);
+        if(turnSpecialist)
+        {
+          let turnSpecialistLength = turnSpecialist?.length ?? 0;
+          for (let j = 0; j < turnSpecialistLength; j++) {
+            const turn = turnSpecialist[j];
+            if (turn.estado != 'disponible') {
+              this.turnList.push(turn);
+            }
           }
         }
       }
@@ -75,9 +80,10 @@ export class TurnosComponent {
     } else {
       turno.estado = 'cancelado';
       turno.comentario = this.comentarioCancelacion;
-      for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
+      let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+      for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
-        const index = turnosEspecialista.turnos.findIndex((t: any) => {
+        const index = turnosEspecialista.turnos?.findIndex((t: any) => {
           return (
             new Date(t.fecha.seconds * 1000).getTime() ==
               new Date(turno.fecha.seconds * 1000).getTime() &&
@@ -104,7 +110,8 @@ export class TurnosComponent {
       this.turnosFiltrados = [...this.turnList];
     } else {
       const busqueda = this.palabraBusqueda.trim().toLocaleLowerCase();
-      for (let i = 0; i < this.turnList.length; i++) {
+      let turnListLength = this.turnList?.length ?? 0;
+      for (let i = 0; i < turnListLength; i++) {
         const turno = this.turnList[i];
         const fechaBusqueda = this.transformarFechaParaBusqueda(turno.fecha);
         if (

@@ -49,7 +49,8 @@ export class MiPerfilComponent implements OnInit {
             this.duracionTurno = this.usuario.especialidad[0].duracionTurno;
             this.activateDayButton();
             this.firestoreService.ObtenerListadoTurnos().subscribe((turnosEspecialista) => {
-              for (let i = 0; i < turnosEspecialista.length; i++) {
+              let turnosEspecialistaLength = turnosEspecialista?.length ?? 0;
+              for (let i = 0; i < turnosEspecialistaLength; i++) {
                 const listaTurnos = turnosEspecialista[i];
                 if (this.usuario.email == listaTurnos.especialista.email) {
                   this.turnosActuales = listaTurnos;
@@ -202,7 +203,8 @@ export class MiPerfilComponent implements OnInit {
     const currentDate = new Date();
     const duracionTurno = this.duracionTurno * 60000;
 
-    for (let i = 0; i < this.diasEspecialista.length; i++) {
+    let diasEspecialistaLength = this.diasEspecialista?.length ?? 0;
+    for (let i = 0; i < diasEspecialistaLength; i++) {
       const day = this.diasEspecialista[i];
       let dayNumber = 0;
       switch (day) {
@@ -276,7 +278,7 @@ export class MiPerfilComponent implements OnInit {
     }
     turno.especialista = this.usuario;
     turno.turnos = listaDeTurnos;
-
+    let listaDeTurnosLength = listaDeTurnos?.length ?? 0;
     
     if (this.turnosActuales?.turnos?.length) {
       let especialidad: string = '';
@@ -296,7 +298,7 @@ export class MiPerfilComponent implements OnInit {
       );
       
       turno.turnos = [...this.turnosActuales.turnos];
-      for (let i = 0; i < listaDeTurnos.length; i++) {
+      for (let i = 0; i < listaDeTurnosLength; i++) {
         const newTurn = listaDeTurnos[i];
         turno.turnos.push(newTurn);
       }

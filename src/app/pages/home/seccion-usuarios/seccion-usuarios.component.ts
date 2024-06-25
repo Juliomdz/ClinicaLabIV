@@ -108,7 +108,7 @@ export class SeccionUsuariosComponent implements OnInit{
             }
             usuario.especialidad += especialidad.nombre;
 
-            if (index !== user.especialidad.length - 1) {
+            if (index !== user.especialidad?.length - 1) {
               usuario.especialidad += " - ";
             }
           }

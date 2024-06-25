@@ -113,7 +113,7 @@ export class MisTurnosComponent implements OnInit {
 
       for (let i = 0; i < auxPacientesDelEspecialistaLength; i++) {
         const paciente = this.auxPacientesDelEspecialista[i];
-        const index = this.pacientesDelEspecialista.findIndex((p) => paciente.id === p.id);
+        const index = this.pacientesDelEspecialista?.findIndex((p) => paciente.id === p.id);
         if (index === -1) {
           this.pacientesDelEspecialista.push(paciente);
         }
@@ -161,15 +161,18 @@ export class MisTurnosComponent implements OnInit {
     let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
     for (let i = 0; i < currentSpecialistTurnListLength; i++) {
       const turnosEspecialista = this.currentSpecialistTurnList[i];
-      const index = turnosEspecialista.turnos.findIndex((t: any) => {
+      const index = turnosEspecialista.turnos?.findIndex((t: any) => {
         return (
           new Date(t.fecha.seconds * 1000).getTime() ==
           new Date(turno.fecha.seconds * 1000).getTime() &&
           t.especialidad == turno.especialidad
         );
       });
+      if (turnosEspecialista.turnos)
+      {
       turnosEspecialista.turnos[index] = turno;
       this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+      }
     }
 
     this.loading = true;
@@ -209,15 +212,18 @@ export class MisTurnosComponent implements OnInit {
       let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
       for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
-        const index = turnosEspecialista.turnos.findIndex((t: any) => {
+        const index = turnosEspecialista.turnos?.findIndex((t: any) => {
           return (
             new Date(t.fecha.seconds * 1000).getTime() ==
             new Date(turno.fecha.seconds * 1000).getTime() &&
             t.especialidad == turno.especialidad
           );
         });
-        turnosEspecialista.turnos[index] = turno;
-        this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        if (turnosEspecialista.turnos)
+        {
+          turnosEspecialista.turnos[index] = turno;
+          this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        }
       }
 
       this.loading = true;
@@ -244,15 +250,18 @@ export class MisTurnosComponent implements OnInit {
     let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
     for (let i = 0; i < currentSpecialistTurnListLength; i++) {
       const turnosEspecialista = this.currentSpecialistTurnList[i];
-      const index = turnosEspecialista.turnos.findIndex((t: any) => {
+      const index = turnosEspecialista.turnos?.findIndex((t: any) => {
         return (
           new Date(t.fecha.seconds * 1000).getTime() ==
           new Date(turno.fecha.seconds * 1000).getTime() &&
           t.especialidad == turno.especialidad
         );
       });
+      if (turnosEspecialista.turnos)
+      {
       turnosEspecialista.turnos[index] = turno;
       this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+      }
     }
 
     this.loading = true;
@@ -284,15 +293,18 @@ export class MisTurnosComponent implements OnInit {
       let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
       for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
-        const index = turnosEspecialista.turnos.findIndex((t: any) => {
+        const index = turnosEspecialista.turnos?.findIndex((t: any) => {
           return (
             new Date(t.fecha.seconds * 1000).getTime() ==
             new Date(turno.fecha.seconds * 1000).getTime() &&
             t.especialidad == turno.especialidad
           );
         });
+        if (turnosEspecialista.turnos)
+        {
         turnosEspecialista.turnos[index] = turno;
         this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        }
       }
 
       this.loading = true;
@@ -331,15 +343,18 @@ export class MisTurnosComponent implements OnInit {
       let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
       for (let i = 0; i < currentSpecialistTurnListLength; i++) {
         const turnosEspecialista = this.currentSpecialistTurnList[i];
-        const index = turnosEspecialista.turnos.findIndex((t: any) => {
+        const index = turnosEspecialista.turnos?.findIndex((t: any) => {
           return (
             new Date(t.fecha.seconds * 1000).getTime() ==
             new Date(turno.fecha.seconds * 1000).getTime() &&
             t.especialidad == turno.especialidad
           );
         });
+        if (turnosEspecialista.turnos)
+        {
         turnosEspecialista.turnos[index] = turno;
         this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        }
       }
 
       this.loading = true;
