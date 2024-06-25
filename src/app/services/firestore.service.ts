@@ -61,4 +61,33 @@ export class FirestoreService {
     const collection = this.angularFirestore.collection<any>('turnos');
     return collection.valueChanges();
   }
+
+  CrearHistorialClinico(turno:any)
+  {
+    return this.angularFirestore.collection<any>('historialesClinicos')
+      .add(turno)
+      .then((data) => {
+        this.angularFirestore
+          .collection('historialesClinicos')
+          .doc(data.id)
+          .set({
+            id: data.id,
+            especialidad: turno.especialidad,
+            especialista: turno.especialista,
+            paciente: turno.paciente,
+            fecha: turno.fecha,
+            detalle: turno.detalle,
+            detalleAdicional: turno.detalleAdicional,
+          });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  ObtenerHistorialesClinicos()
+  {
+    const collection = this.angularFirestore.collection<any>('historialesClinicos');
+    return collection.valueChanges();
+  }
 }

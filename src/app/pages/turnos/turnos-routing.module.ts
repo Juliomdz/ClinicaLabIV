@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { TurnosComponent } from './turnos/turnos.component';
+import { seLogueoGuard } from 'app/guard/se-logueo.guard';
 
 const routes: Routes = [
   {
@@ -11,11 +12,13 @@ const routes: Routes = [
   },
   {
     path:"mis-turnos",
-    component:MisTurnosComponent
+    component:MisTurnosComponent,
+    canActivate:[seLogueoGuard]
   },
   {
     path:"solicitar-turno",
-    component:SolicitarTurnoComponent
+    component:SolicitarTurnoComponent,
+    canActivate:[seLogueoGuard]
   },
 ];
 

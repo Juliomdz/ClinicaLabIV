@@ -26,6 +26,7 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user: any) => {
           if (user) {
+            this.seLogueo = true;
             return this.angularFirestore.doc<Usuario>(`usuarios/${user.uid}`).valueChanges();
           } else {
             return of(null);

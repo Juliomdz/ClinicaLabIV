@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 $font: "Montserrat", sans-serif;
@@ -16,6 +17,7 @@ $font: "Montserrat", sans-serif;
 }
 
 .turnos {
+  font-family: $font;
   position: absolute;
   overflow-y: scroll;
   width: 90vw;
@@ -119,6 +121,12 @@ $font: "Montserrat", sans-serif;
   background: #0099ff;
 }
 
+.btn-cargar-historial{
+  background-color:cornflowerblue; 
+  color: #fff; 
+  font-weight: bolder;
+}
+
 .estado {
   text-transform: uppercase;
   padding: 0.5rem;
@@ -133,42 +141,12 @@ $font: "Montserrat", sans-serif;
   border-radius: 5px;
 }
 
-.contenedor-form {
-  color: #fff;
-  font-weight: bolder;
-  padding: 0.5rem;
-  background: #17444f;
-}
-
 .modal-body{
-  background-color: #236c7d;
+  background-color: #0b6e5fd9;
   color: #fff;
-}
-
-.contenedor-adicionales {
-  color: #fff;
-  font-weight: bolder;
-  padding: 0.5rem;
-  background: #17444f;
-}
-
-.input-busqueda {
-  width: 15rem;
-  border: 3px solid rgb(0, 119, 255);
-  border-radius: 10px;
-  height: 2rem;
-  padding-left: 1rem;
-  box-shadow: 2px 2px 4px #000;
-}
-
-.input-busqueda:focus {
-  border: 3px solid rgb(0, 119, 255);
-  box-shadow: 0 0 12px #0099ff;
-  transition: box-shadow 0.5s;
 }
 
 // RESPONSIVE
-
 @media screen and (max-width: 480px) {
   .turnos-container {
     min-height: 100vh;

@@ -16,12 +16,18 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class SeccionUsuariosComponent implements OnInit{
 
+  loading:boolean = false;
+  usuario: any = null;
   listadoUsuarios: any[] = [];
+  historialClinico: any[] = [];
+  historialActivo: any[] = [];
+  hayHistorial: boolean = false;
+
+  listaTurnos: any[] = [];
   createrUserMenu: boolean = false;
   formPaciente: boolean = false;
   formEspecialista: boolean = false;
   formAdministrador: boolean = false;
-  loading: boolean = false;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -32,14 +38,37 @@ export class SeccionUsuariosComponent implements OnInit{
   ngOnInit(): void {
     this.loading = true;
     this.firestoreService.TraerUsuarios().subscribe((users) => {
+      this.loading = false;
       if (users) {
-        this.loading = false;
         this.listadoUsuarios = users;
       }
-    })
+      this.firestoreService.ObtenerHistorialesClinicos().subscribe((historial) => {
+        this.historialClinico = historial;
+        let listadoUsuariosLength = this.listadoUsuarios?.length ?? 0;
+        historial.forEach((h) => {
+          for (let i = 0; i < listadoUsuariosLength; i++) {
+            const usuario = this.listadoUsuarios[i];
+            if (usuario.perfil == 'Paciente' && usuario.id == h.paciente.id) {
+              this.listadoUsuarios[i].historial = true;
+            }
+          }
+        });
+      });
+      this.firestoreService.ObtenerListadoTurnos().subscribe((turnos: any) => {
+        this.listaTurnos = [];
+        let turnosLength = turnos?.length ?? 0;
+        for (let i = 0; i < turnosLength; i++) {
+          const turnoEspecialista = turnos[i].turnos;
+          for (let j = 0; j < turnoEspecialista.length; j++) {
+            const t = turnoEspecialista[j];
+            this.listaTurnos.push(t);
+          }
+        }
+      });
+    });
   }
 
-  updateUser(user: Usuario, option: number) {
+  CambiarEstado(user: Usuario, option: number) {
     if (user.perfil == 'Especialista') {
       if (option == 1) {
         user.aprobado = true;
@@ -49,6 +78,47 @@ export class SeccionUsuariosComponent implements OnInit{
         user.aprobado = false;
         this.authService.ActualizarUsuario(user);
         this.swal.MostrarExito("EXITO","El especialista fue deshabilitado")
+      }
+    }
+  }
+  VerHistorialPaciente(paciente: any,event:any) {
+    this.historialActivo = [];
+    let historialClinicoLength = this.historialClinico?.length ?? 0;
+    for (let i = 0; i < historialClinicoLength; i++) {
+      const historial = this.historialClinico[i];
+      if (historial.paciente.id == paciente.id) {
+        this.historialActivo.push(historial);
+      }
+    }
+    event.stopPropagation();
+  }
+
+  VerTurnosPaciente(usuario: any) {
+    const listaTurnosUsuario: any[] = [];
+    if (usuario.perfil == 'Paciente') {
+      this.listaTurnos.forEach((t: any) => {
+        if (usuario.id == t?.paciente?.id) {
+          const turno: any = {};
+          turno.nombrePaciente = usuario.nombre;
+          turno.apellidoPaciente = usuario.apellido;
+          turno.fecha = new Date(t.fecha.seconds * 1000);
+          turno.especialidad = t.especialidad;
+          turno.nombreEspecialista = t.especialista.nombre;
+          turno.apellidoEspecialista = t.especialista.apellido;
+          listaTurnosUsuario.push(turno);
+        }
+      });
+      if (listaTurnosUsuario.length == 0) {
+        this.swal.MostrarAdvertencia(
+          'ATENCION',
+          'No se han encontrado turnos del paciente'
+        );
+      } else {
+        this.exportAsExcelFile(listaTurnosUsuario, `Turnos-${usuario.nombre}-${usuario.apellido}`);
+        this.swal.MostrarExito(
+          'EXITO',
+          'Se han descargado exitosamente los turnos del paciente',
+        );
       }
     }
   }
@@ -82,7 +152,7 @@ export class SeccionUsuariosComponent implements OnInit{
     this.formAdministrador = false;
   }
 
-  descargarExcel() {
+  DescargarExcel() {
     const listadoAGuardar: any[] = [];
     this.listadoUsuarios.forEach((user: any) => {
       const usuario: any = {};
@@ -125,7 +195,7 @@ export class SeccionUsuariosComponent implements OnInit{
         listadoAGuardar.push(usuario);
       }
     });
-    this.exportAsExcelFile(listadoAGuardar, 'Usuario-Clinica');
+    this.exportAsExcelFile(listadoAGuardar, 'Usuarios-ClinicaOnline');
     this.swal.MostrarExito("EXITO","Se descargo el lista de usuarios")
   }
 

@@ -99,6 +99,27 @@ p {
     width: fit-content;
 }
 
+.modal{
+    font-family: $font;
+}
+
+.carta-historial {
+    h4 {
+        background-color: grey;
+        text-align: start;
+        font-weight: bolder;
+        padding: 1rem;
+    }
+    span {
+        text-decoration: underline;
+        font-weight: bolder;
+        color: black;
+    }
+    p{
+        color: black;
+    }
+}
+
 /* heart beat */
 .overlay {
     position: fixed;

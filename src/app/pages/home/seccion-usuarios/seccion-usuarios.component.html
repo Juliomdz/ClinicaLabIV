@@ -1,54 +1,58 @@
+<div class="overlay" *ngIf="loading">
+    <div class="heartbeatloader">
+        <svg class="svgdraw" width="100%" height="100%" viewBox="0 0 150 400" xmlns="http://www.w3.org/2000/svg">
+            <path class="path"
+                d="M 0 200 l 40 0 l 5 -40 l 5 40 l 10 0 l 5 15 l 10 -140 l 10 220 l 5 -95 l 10 0 l 5 20 l 5 -20 l 30 0"
+                fill="transparent" stroke-width="4" stroke="black"></path>
+        </svg>
+        <div class="innercircle"></div>
+        <div class="outercircle"></div>
+    </div>
+</div>
 <div class="background-image"></div>
-<div class="tabla-usuario text-focus-in" *ngIf="!createrUserMenu">
-    <h3>LISTADO DE USUARIOS</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col" style="color: #000;">FOTO</th>
-                <th scope="col" style="color: #000;">PERFIL</th>
-                <th scope="col" style="color: #000;">NOMBRE</th>
-                <th scope="col" style="color: #000;">APELLIDO</th>
-                <th scope="col" style="color: #000;">ACCIÓN</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="tr-tabla" *ngFor="let user of listadoUsuarios">
-                <td>
-                    <div style="display: flex; flex-direction: column; align-items: start; margin: 0;">
-                        <img class="imagen-usuario" src="{{ user.fotos[0] }}" alt="imagen" />
+<div style="padding-top: 10rem;" *ngIf="!createrUserMenu">
+    <div class="listado-usuarios">
+        <h3>Listado de Usuarios</h3>
+        <div class="contenedor-cartas">
+            <div *ngFor="let usuario of listadoUsuarios">
+                <div class="card" appTarjetaHover style="margin:10px;" (click)="VerTurnosPaciente(usuario)">
+                    <div class="card-content">
+                        <span class="texto-perfil" style="text-transform: upperCase; font-weight: bolder; margin-bottom: 15px;">
+                            <span *ngIf="usuario.perfil == 'Administrador'">Administrador</span>
+                            <span *ngIf="usuario.perfil == 'Paciente'">Paciente</span>
+                            <span *ngIf="usuario.perfil == 'Especialista'">Especialista</span>
+                        </span>
+                        <img class="imagen-usuario" src="{{ usuario?.fotos[0] }}" alt="imagen" />
+                        <span style="text-transform: upperCase; font-weight: bolder;color:#F1FAEE">{{ usuario.apellido }} {{ usuario.nombre}}</span>
+                        <div class="card-button">
+                            <div *ngIf="usuario.perfil == 'Especialista'">
+                                <button class="btn-habilitar" *ngIf="!usuario.aprobado" (click)="CambiarEstado(usuario, 1)">
+                                    Habilitar
+                                </button>
+                                <button class="btn-deshabilitar" *ngIf="usuario.aprobado" (click)="CambiarEstado(usuario, 2)">
+                                    Deshabilitar
+                                </button>
+                            </div>
+                            <div *ngIf="usuario.perfil == 'Paciente' && usuario.historial">
+                                <button class="btn-historial" data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="VerHistorialPaciente(usuario, $event)">
+                                Historial
+                              </button>
+                            </div>
+                        </div>
                     </div>
-                </td>
-                <td style="text-transform: upperCase">
-                    <span>{{ user.perfil }}</span>
-                </td>
-                <td>
-                    <span>{{ user.nombre }}</span>
-                </td>
-                <td>
-                    <span>{{ user.apellido }}</span>
-                </td>
-                <td>
-                    <div *ngIf="user.perfil == 'Especialista'">
-                        <button class="btn-habilitar" *ngIf="!user.aprobado" (click)="updateUser(user, 1)">
-                            Habilitar
-                        </button>
-                        <button class="btn-deshabilitar" *ngIf="user.aprobado" (click)="updateUser(user, 2)">
-                            Deshabilitar
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <button class="btn-nuevo-usuario" *ngIf="!createrUserMenu" (click)="showCreateUserMenu()">
     REGISTRAR USUARIO
 </button>
 
-<button class="btn-habilitar btn-excel" *ngIf="!createrUserMenu" (click)="descargarExcel()">
-    Descargar Excel
-  </button>
+<button class="btn-habilitar btn-excel" *ngIf="!createrUserMenu" (click)="DescargarExcel()">
+  Descargar Excel
+</button>
 
 <button class="btn-menu-volver" *ngIf="createrUserMenu" (click)="showUserList()">
     VOLVER AL LISTADO DE USUARIOS
@@ -86,4 +90,69 @@
         Volver
     </button>
     <app-form-alta-administrador></app-form-alta-administrador>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #F1FAEE; color: #000000;">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    HISTORIAL CLÍNICO
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let historial of historialActivo" class="carta-historial">
+                    <h3 style="background-color: grey;">{{ historial?.fecha | diaTurno }}</h3>
+                    <hr />
+                    <p>
+                        <span>Paciente</span>: {{ historial.paciente.apellido }},
+                        {{ historial.paciente.nombre }}
+                    </p>
+                    <p><span>Especialidad</span>: {{ historial.especialidad }}</p>
+                    <p>
+                        <span>Especialista</span>: {{ historial.especialista.apellido }},
+                        {{ historial.especialista.nombre }}
+                    </p>
+                    <p><span>Detalles</span></p>
+                    <div class="row justify-content-around">
+                        <div class="col-4">
+                            <p>Altura: {{ historial?.detalle?.altura }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p>Peso: {{ historial?.detalle?.peso }}</p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col-4">
+                            <p>Temperatura: {{ historial?.detalle?.temperatura }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p>Presión: {{ historial?.detalle?.presion }}</p>
+                        </div>
+                    </div>
+                    <p><span>Información adicional</span></p>
+                    <div class="row justify-content-between">
+                        <div class="col-3">
+                            <p *ngIf="historial?.detalleAdicional?.clave1">
+                                {{ historial?.detalleAdicional?.clave1 }}: {{ historial?.detalleAdicional?.valor1 }}
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p *ngIf="historial?.detalleAdicional?.clave2">
+                                {{ historial?.detalleAdicional?.clave2 }}: {{ historial?.detalleAdicional?.valor2 }}
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p *ngIf="historial?.detalleAdicional?.clave3">
+                                {{ historial?.detalleAdicional?.clave3 }}: {{ historial?.detalleAdicional?.valor3 }}
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

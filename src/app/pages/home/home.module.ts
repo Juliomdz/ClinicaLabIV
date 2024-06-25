@@ -7,7 +7,9 @@ import { ErrorComponent } from './error/error.component';
 import { SeccionUsuariosComponent } from './seccion-usuarios/seccion-usuarios.component';
 import { ComponentsModule } from 'app/components/components.module';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InformesComponent } from './informes/informes.component';
+import { PacientesComponent } from './pacientes/pacientes.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     WelcomeComponent,
     ErrorComponent,
     SeccionUsuariosComponent,
-    MiPerfilComponent
+    MiPerfilComponent,
+    InformesComponent,
+    PacientesComponent
   ],
   imports: [
     FormsModule,

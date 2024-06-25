@@ -46,21 +46,4 @@ $font: 'Montserrat', sans-serif;
 .card-footer{
     display: flex;
     justify-content: space-evenly;
-    .btn{
-        border-radius: 8px;
-        color: #F1FAEE;
-        background-color: #0B6E4F;
-        transition: all 0.3s ease 0s;
-    }
-
-    .btn:hover {
-        background-color: #F18F01;
-        box-shadow: 0px 15px 20px #f1910191;
-        color: white;
-        transform: translateY(-7px);
-    }
-    
-    .btn:active {
-        transform: translateY(-1px);
-    }
 }

@@ -16,6 +16,7 @@ $font: "Montserrat", sans-serif;
   }
 
 .turnos {
+  font-family: $font;
   position: absolute;
   overflow-y: scroll;
   width: 90vw;
@@ -25,7 +26,12 @@ $font: "Montserrat", sans-serif;
   z-index: 100;
   padding: 1rem;
   border-radius: 1rem;
-  background: #4b898b;
+  background: #000;
+  color: #fff;
+  padding: 1rem;
+  background-color: #4b898b;
+  border: 2px solid #fff;
+  box-shadow: 2px 2px 4px #000;
   h3 {
     font-family: $font;
     text-align: center;
@@ -36,11 +42,10 @@ $font: "Montserrat", sans-serif;
   }
   label {
     font-size: 1.2rem;
-    font-weight: bold;
   }
   p {
     font-size: 1rem;
-    color: rgb(255, 255, 255);
+    color: rgb(100, 100, 100);
     margin-bottom: 1rem;
     text-transform: uppercase;
   }
@@ -55,7 +60,6 @@ $font: "Montserrat", sans-serif;
   padding: 1rem;
   border: 2px solid #fff;
   box-shadow: 2px 2px 4px #000;
-  text-shadow: 1px 1px #000;
   h3 {
     text-align: center;
   }
@@ -86,27 +90,11 @@ $font: "Montserrat", sans-serif;
 }
 
 .estado {
-  font-weight: bolder;
   text-transform: uppercase;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid rgb(255, 255, 255);
-  background: #0071b3;
-}
-
-.input-busqueda {
-  width: 15rem;
-  border: 3px solid rgb(0, 119, 255);
-  border-radius: 10px;
-  height: 2rem;
-  padding-left: 1rem;
-  box-shadow: 2px 2px 4px #000;
-}
-
-.input-busqueda:focus {
-  border: 3px solid rgb(0, 119, 255);
-  box-shadow: 0 0 12px #0099ff;
-  transition: box-shadow 0.5s;
+  background: #A8DADC;
 }
 
 // RESPONSIVE

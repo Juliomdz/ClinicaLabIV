@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   usuario:any
 
-  constructor(public authService:AuthService,private swal:SwalService,private router:Router) { }
+  constructor(public authService:AuthService,private swal:SwalService,private router:Router) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user:any) => {

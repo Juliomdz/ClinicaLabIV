@@ -4,6 +4,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
 import { SeccionUsuariosComponent } from './seccion-usuarios/seccion-usuarios.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { PacientesComponent } from './pacientes/pacientes.component';
+import { seLogueoGuard } from 'app/guard/se-logueo.guard';
 
 const routes: Routes = [
   {
@@ -12,11 +14,18 @@ const routes: Routes = [
   },
   {
     path:'usuarios',
-    component:SeccionUsuariosComponent
+    component:SeccionUsuariosComponent,
+    canActivate:[seLogueoGuard]
   },
   {
     path:'perfil',
-    component:MiPerfilComponent
+    component:MiPerfilComponent,
+    canActivate:[seLogueoGuard]
+  },
+  {
+    path:"pacientes",
+    component:PacientesComponent,
+    canActivate:[seLogueoGuard]
   },
   {
     path:"error",

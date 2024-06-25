@@ -56,24 +56,6 @@ $font: 'Montserrat', sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.btn {
-  border-radius: 8px;
-  color: #f1faee;
-  background-color: #22b687;
-  transition: all 0.3s ease 0s;
-}
-
-.btn:hover {
-  background-color: #f18f01;
-  box-shadow: 0px 15px 20px #f1910191;
-  color: white;
-  transform: translateY(-7px);
-}
-
-.btn:active {
-  transform: translateY(-1px);
-}
-
 .mensaje-error{
   color: rgb(115, 7, 7);
   border-radius: 5px;

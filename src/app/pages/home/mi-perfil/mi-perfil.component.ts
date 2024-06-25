@@ -3,6 +3,8 @@ import { AuthService } from 'app/services/auth.service';
 import { FirestoreService } from 'app/services/firestore.service';
 import { NotificationService } from 'app/services/notification.service';
 import { SwalService } from 'app/services/swal.service';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -26,8 +28,14 @@ export class MiPerfilComponent implements OnInit {
   viernes: boolean = false;
   sabado: boolean = false;
   duracionTurno: number = 30;
+  historialClinico: any[] = [];
+  historialClinicoFiltrado: any[] = [];
+  hayHistorial: boolean = false;
+  hayHistorialFiltrado: boolean = true;
 
   turnosActuales: any = {};
+  palabraBusqueda: string = '';
+  fechaActual: Date = new Date();
 
   constructor(public authService:AuthService,private swal:SwalService,private notificationService:NotificationService,private firestoreService:FirestoreService) {}
 
@@ -40,8 +48,12 @@ export class MiPerfilComponent implements OnInit {
         if(this.authService.esPaciente)
         {
           this.esPaciente = true;
+          this.firestoreService.ObtenerHistorialesClinicos().subscribe((historial) => {
+            this.historialClinico = historial.filter((h) => h.paciente.id == this.usuario.id);
+            this.hayHistorial = this.historialClinico?.length > 0;
+          });
         }
-        if(this.authService.esEspecialista)
+        else if(this.authService.esEspecialista)
         {
           this.esEspecialista = true
           if (this.usuario.especialidad[0].diasTurnos) {
@@ -331,6 +343,72 @@ export class MiPerfilComponent implements OnInit {
       this.diasEspecialista = [...this.usuario?.especialidad[1].diasTurnos];
       this.activateDayButton();
     }
+  }
+  verHistorialClinico() {
+    this.historialClinicoFiltrado = [...this.historialClinico];
+  }
+
+  filtrarHistorialClinico(nombreEspecialista: string) {
+    this.historialClinicoFiltrado = [];
+    const nombreLower = nombreEspecialista.toLowerCase();
+
+    if (nombreEspecialista === '') {
+      this.historialClinicoFiltrado = [...this.historialClinico];
+    } else {
+      let historialClinicoLength = this.historialClinico?.length ?? 0;
+      for (let i = 0; i < historialClinicoLength; i++) {
+        const historial = this.historialClinico[i];
+        const especialistaNombreLower = historial.especialista.nombre.toLowerCase();
+        const especialistaApellidoLower = historial.especialista.apellido.toLowerCase();
+        const nombreCompletoLower = especialistaNombreLower + ' ' + especialistaApellidoLower;
+
+        if (nombreCompletoLower.includes(nombreLower)) {
+          this.historialClinicoFiltrado.push(historial);
+        }
+      }
+    }
+
+    if (this.historialClinicoFiltrado.length === 0) {
+      this.hayHistorialFiltrado = false;
+    } else {
+      this.hayHistorialFiltrado = true;
+    }
+  }
+
+  DescargarPDF() {
+    this.loading = true
+    const DATA = document.getElementById('pdf');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 1,
+    };
+    //@ts-ignore
+    html2canvas(DATA, options)
+      .then((canvas) => {
+        const img = canvas.toDataURL('image/PNG');
+        const bufferX = 30;
+        const bufferY = 30;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(
+          img,
+          'PNG',
+          bufferX,
+          bufferY,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          'FAST'
+        );
+        return doc;
+      })
+      .then((docResult) => {
+        docResult.save(`HistorialClinico-${this.usuario.apellido}.${this.usuario.nombre}.pdf`);
+        this.swal.MostrarExito("EXITO","¡Se ha descargardo con exito el PDF!")
+        this.loading = false;
+      });
   }
 
 }

@@ -14,32 +14,43 @@
         <div *ngIf="patientSelectionMenu">
             <h3>PACIENTES</h3>
             <div class="row" style="overflow-x: scroll">
-                <div class="col carta-especialista mb-2" *ngFor="let pac of pacientesList" (click)="MostrarPaciente(pac)">
+                <div class="col carta-pacientes mb-2" style="cursor: pointer;" *ngFor="let pac of pacientesList" (click)="MostrarPaciente(pac)">
                     <p>{{ pac.nombre }} - {{ pac.apellido }}</p>
                     <img [src]="pac?.fotos[0]" style="width: 15rem; height: 15rem; display: flex; justify-content: center; border-radius: 50%;">
                 </div>
             </div>
         </div>
 
-        <div class="contenedor-especialistas" *ngIf="specialistSelectionMenu && !patientSelectionMenu">
-            <h3>ESPECIALISTAS</h3>
-            <div class="contenedor-carta-esp" style="display: flex; justify-content: center">
-                <div *ngFor="let esp of especialistasList" (click)="MostrarEspecialista(esp)">
-                    <div>
-                        <p style="text-align: center; font-size: 2rem; color: #F18F01;">
-                            {{ esp.nombre }} - {{ esp.apellido }}
-                        </p>
-                        <img class="carta-especialista" style="width: 15rem; height: 15rem; display: flex; justify-content: center;" 
-                            src="{{ esp.fotos[0] }}"alt="imagen"/>
-                    </div>
+        <div *ngIf="especialidadMenuSeleccion && !patientSelectionMenu">
+            <h3>ESPECIALIDADES</h3>
+            <div class="row">
+                <div class="col especialidades" *ngFor="let especialidad of listadoEspecialidades" (click)="MostrarEspecialista(especialidad)">
+                    <img *ngIf="especialidad.nombre == 'Endocrinología'" src="../../../../assets/iconos/endocrinology.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Geriatría'" src="../../../../assets/iconos/geriatrics.png" alt="" />
+                    <img *ngIf="especialidad.nombre == 'Cardiología'" src="../../../../assets/iconos/cardiogram.png" alt="" />
+                    <img *ngIf="especialidad.nombre != 'Endocrinología' && especialidad.nombre != 'Geriatría' && especialidad.nombre != 'Cardiología'" src="../../../../assets/iconos/default.png" alt="" />
                 </div>
             </div>
         </div>
-        <div *ngIf="activeEspecialista && !turnsSelectionMenu">
-            <h3>ESPECIALIDADES</h3>
-            <div class="row">
-                <div class="col" *ngFor="let especialidad of activeEspecialista.especialidad">
-                    <button class="especialidades" (click)="showTurns(especialidad)">{{especialidad.nombre}}</button>
+
+        <div class="contenedor-especialistas" *ngIf="!turnsSelectionMenu && speciality">
+            <div class="contenedor-carta-esp" style="display: flex; justify-content: center">
+                <div *ngIf="arrayEspecialistas.length > 0">
+                <h3>ESPECIALISTAS</h3>
+                <div *ngFor="let esp of arrayEspecialistas">
+                    <div>
+                        <p style="text-align: center; font-size: 2rem; color: #F18F01;">
+                            {{ esp.apellido }} {{ esp.nombre }}
+                        </p>
+                        <div class="marco-esp">
+                            <img class="carta-especialista" style=" width: 10rem; height: 10rem; display: flex; margin-left: 5rem; justify-content: center;" 
+                            src="{{ esp.fotos[0] }}" alt="imagen" (click)="showTurns(esp)"/>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="arrayEspecialistas.length == 0">
+                    <span class="mb-3 mt-2" style="color: #fff; font-size: large;">Actualmente no hay Especialistas que trabajen con {{speciality?.nombre}}</span>
                 </div>
             </div>
         </div>
@@ -50,16 +61,16 @@
                 <div class="col carta-turno">
                     <img src="{{ activeEspecialista.fotos[0] }}" alt="imagen" />
                     <h1 class="especialista-activo">
-                        {{ activeEspecialista.nombre }} - {{ activeEspecialista.apellido }}
+                        {{ activeEspecialista.apellido }} {{ activeEspecialista.nombre }} 
                     </h1>
                     <h1 class="especialista-activo">{{ speciality.nombre }}</h1>
                 </div>
                 <div class="col turnos-desk" style="overflow-y: scroll; height: 35rem">
-                    <button class="btn btn-turnos" style=" text-transform: uppercase; margin-left: 0.5rem; margin-right: 0.5rem; margin-bottom: 0.5rem; width: 150px;height: 150px;" *ngFor="let turno of turnosAMostrar" (click)="SeleccionarTurno(turno)">
-                        <p style="font-size: 15px;">{{ turno.fecha | dayWithHour}}</p>
+                    <button class="btn btn-turnos" *ngFor="let turno of turnosAMostrar" (click)="SeleccionarTurno(turno)">
+                        <p style="font-size: 15px;">{{ turno.fecha | horarioTurno}}</p>
                     </button>
                     <br />
-                    <p *ngIf="diasAMostrar?.length == 0" style="text-align: center">
+                    <p *ngIf="diasAMostrar.length == 0" style="text-align: center">
                         No hay turnos disponibles
                     </p>
                 </div>
@@ -70,5 +81,6 @@
             Solicitar Turno
         </button>
     </div>
+    <button class="btn btn-regresar" appBotonHover *ngIf="!especialidadMenuSeleccion || speciality" (click)="VolverALasEspecialidades()">Volver a Especialidades</button>
 </div>
 <div class="solicitar-turno-container"></div>

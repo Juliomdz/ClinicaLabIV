@@ -1,56 +1,66 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
       <a class="navbar-brand" [routerLink]="['/home']">
-          <img src="../../../assets/favicon.png" alt="Favicon" class="favicon d-inline-block align-text-top"
-              style="height: 50px; padding-right: 10px;">
+        <img src="../../../assets/favicon.png" alt="Favicon" class="favicon d-inline-block align-text-top"
+          style="height: 50px; padding-right: 10px;">
       </a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/home']">
-                  <button class="btn-nav">Inicio</button>
-              </a>
-          </li>
-          <li class="nav-item" *ngIf="usuario?.perfil == 'Administrador'">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/usuarios']">
-                  <button class="btn-nav">Usuarios</button>
-              </a>
-          </li>
-          <li class="nav-item" *ngIf="authService.seLogueo">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/perfil']">
-                <button class="btn-nav">Mi perfil</button>
-            </a>
-          </li>
-          <li class="nav-item" *ngIf="authService.esEspecialista || authService.esPaciente">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/turnos/mis-turnos']">
-                <button class="btn-nav">Mis turnos</button>
-            </a>
-          </li>
-          <li class="nav-item" *ngIf="authService.esAdmin">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/turnos']">
-                <button class="btn-nav">Turnos</button>
-            </a>
-          </li>
-          <li class="nav-item" *ngIf="authService.esAdmin || authService.esPaciente">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/turnos/solicitar-turno']">
-                <button class="btn-nav">Solicitar turno</button>
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/home']">
+            <button class="btn-nav">Inicio</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="usuario?.perfil == 'Administrador'">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/usuarios']">
+            <button class="btn-nav">Usuarios</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.seLogueo">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/perfil']">
+            <button class="btn-nav">Mi perfil</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.esEspecialista || authService.esPaciente">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/turnos/mis-turnos']">
+            <button class="btn-nav">Mis turnos</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.esEspecialista">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/pacientes']">
+            <button class="btn-nav">Mis Pacientes</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.esAdmin">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/turnos']">
+            <button class="btn-nav">Turnos</button>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.esAdmin || authService.esPaciente">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/turnos/solicitar-turno']">
+            <button class="btn-nav">Solicitar turno</button>
+          </a>
+        </li>
       </ul>
       <button *ngIf="!usuario" class="btn-login" [routerLink]="['auth/login']">Iniciar Sesión</button>
       <button *ngIf="!usuario" class="btn-registro" [routerLink]="['auth/register']">Registro</button>
       <span class="userInfo" *ngIf="usuario">
-          <div class="user-info-content">
-            <img class="img-btn" src="{{ usuario?.fotos[0] }}" alt="usuario" />
-            <div class="user-info-details">
-              <p class="user-info-name">
-                {{ usuario?.nombre }} {{ usuario?.apellido }}
-              </p>
-            </div>
+        <div class="user-info-content">
+          <img class="img-btn" src="{{ usuario?.fotos[0] }}" alt="usuario" />
+          <div class="user-info-details">
+            <p class="user-info-name">
+              {{ usuario?.nombre }} {{ usuario?.apellido }}
+            </p>
           </div>
-          <button type="button" (click)="CerrarSesion()" class="btn-logout">
-            Cerrar Sesión
-          </button>
-        </span>
+        </div>
+        <button type="button" (click)="CerrarSesion()" class="btn-logout">
+          Cerrar Sesión
+        </button>
+      </span>
+    </div>
   </div>
 </nav>
 

@@ -3,6 +3,7 @@ import { AuthService } from 'app/services/auth.service';
 import { NotificationService } from 'app/services/notification.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';  //Historial clinico
 import { FirestoreService } from 'app/services/firestore.service';
+import { SwalService } from 'app/services/swal.service';
 
 
 @Component({
@@ -48,18 +49,31 @@ export class MisTurnosComponent implements OnInit {
   confirmacionFinalizacion: boolean = false;
   comentarioFinalizacion: string = '';
   turnoAFinalizar: any = {};
-
   turnoFinalizado: any = {};
 
   palabraBusqueda: string = '';
   turnosFiltrados: any[] = [];
+  formHistorial: FormGroup;
+  cantidadClaveValor: number = 0;
+  arrayClaveValorAdicionales: any[] = [];
+  dato1: string[] = ['', ''];
+  dato2: string[] = ['', ''];
+  dato3: string[] = ['', ''];
 
   constructor(
     private authService:AuthService,
     private notificationService:NotificationService,
     private formBuilder:FormBuilder,
-    private firestoreService:FirestoreService
-  ) {}
+    private firestoreService:FirestoreService,
+    private swal:SwalService
+  ) {
+    this.formHistorial = this.formBuilder.group({
+      altura: ['', [Validators.required]],
+      peso: ['', [Validators.required]],
+      temperatura: ['', [Validators.required]],
+      presion: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit(): void {
     this.loading = true
@@ -183,7 +197,7 @@ export class MisTurnosComponent implements OnInit {
       this.cancelacionTurno = false;
       this.confirmacionRechazo = false;
       this.confirmacionFinalizacion = false;
-      this.notificationService.showSuccess("Mis Turnos","Turno aceptado exitosamente!")
+      this.notificationService.showSuccess("Turno aceptado exitosamente!","Mis Turnos")
     }, 1000);
   }
 
@@ -313,7 +327,7 @@ export class MisTurnosComponent implements OnInit {
         this.turnoACalificar = {};
         this.vistaComentarioCalificacion = false;
         this.confirmacionFinalizacion = false;
-        this.notificationService.showSuccess("Turno aceptado exitosamente!","Mis Turnos")
+        this.notificationService.showSuccess("Turno calificado exitosamente!","Mis Turnos")
       }, 1000);
     }
   }
@@ -453,5 +467,94 @@ export class MisTurnosComponent implements OnInit {
     }
     return rtn;
   }
+  abrirFormHistorialClinico(turno: any) {
+    this.turnoFinalizado = { ...turno };
+  }
 
+  agregarClaveValor() {
+    if (this.cantidadClaveValor < 3) {
+      this.cantidadClaveValor++;
+      if (this.cantidadClaveValor == 1) {
+        this.arrayClaveValorAdicionales.push(this.dato1);
+      } else if (this.cantidadClaveValor == 2) {
+        this.arrayClaveValorAdicionales.push(this.dato2);
+      } else {
+        this.arrayClaveValorAdicionales.push(this.dato3);
+      }
+    }
+  }
+
+  CrearHistorialClinico() {
+    this.loading = true;
+    if (this.formHistorial.valid) {
+      let detalle: any = {
+        altura: this.formHistorial.getRawValue().altura,
+        peso: this.formHistorial.getRawValue().peso,
+        temperatura: this.formHistorial.getRawValue().temperatura,
+        presion: this.formHistorial.getRawValue().presion,
+      };
+      console.log("hola")
+
+      let detalleAdicional: any = {};
+      if (this.arrayClaveValorAdicionales.length == 1) {
+        detalleAdicional.clave1 = this.dato1[0];
+        detalleAdicional.valor1 = this.dato1[1];
+      }
+      if (this.arrayClaveValorAdicionales.length == 2) {
+        detalleAdicional.clave1 = this.dato1[0];
+        detalleAdicional.valor1 = this.dato1[1];
+        detalleAdicional.clave2 = this.dato2[0];
+        detalleAdicional.valor2 = this.dato2[1];
+      }
+      if (this.arrayClaveValorAdicionales.length == 3) {
+        detalleAdicional.clave1 = this.dato1[0];
+        detalleAdicional.valor1 = this.dato1[1];
+        detalleAdicional.clave2 = this.dato2[0];
+        detalleAdicional.valor2 = this.dato2[1];
+        detalleAdicional.clave3 = this.dato3[0];
+        detalleAdicional.valor3 = this.dato3[1];
+      }
+
+      this.turnoFinalizado.detalle = detalle;
+      this.turnoFinalizado.detalleAdicional = detalleAdicional;
+      this.ModificarTurnoFinalizado(this.turnoFinalizado);
+      this.firestoreService.CrearHistorialClinico(this.turnoFinalizado)
+        .then(() => {
+          this.loading = false;
+          this.dato1 = ['', ''];
+          this.dato2 = ['', ''];
+          this.dato3 = ['', ''];
+          this.arrayClaveValorAdicionales = [];
+          this.cantidadClaveValor = 0;
+          this.formHistorial.reset();
+          this.swal.MostrarExito("EXITO","¡Se ha creado el Historial de forma exitosa!")
+        })
+        .catch(() => {
+          this.loading = false;
+        })
+    }
+    else{
+      this.swal.MostrarError("ERROR","¡Asegurese de completar todos los campos!")
+      this.loading = false;
+    }
+  }
+
+  ModificarTurnoFinalizado(turno: any) {
+    turno.historial = true;
+    let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+    for (let i = 0; i < currentSpecialistTurnListLength; i++) {
+      const turnosEspecialista = this.currentSpecialistTurnList[i];
+      const index = turnosEspecialista.turnos?.findIndex((t: any) => { 
+        return (
+          new Date(t.fecha.seconds * 1000).getTime() ==
+          new Date(turno.fecha.seconds * 1000).getTime() &&
+          t.especialidad == turno.especialidad
+        );
+      });
+      if (turnosEspecialista.turnos){
+      turnosEspecialista.turnos[index] = turno; //REVISAR
+      this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+      }
+    }
+  }
 }

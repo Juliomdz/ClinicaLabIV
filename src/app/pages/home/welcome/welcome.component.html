@@ -9,8 +9,8 @@
                 <p class="card-text">¡Que disfrute de su estadia!</p>
             </div>
             <div class="card-footer bg-transparent" *ngIf="!authService.seLogueo">
-                <button class="btn" [routerLink]="['/auth/login']">Iniciar Sesión</button>
-                <button class="btn" [routerLink]="['/auth/register']">Registrarse</button>
+                <button appBotonHover [routerLink]="['/auth/login']">Iniciar Sesión</button>
+                <button appBotonHover [routerLink]="['/auth/register']">Registrarse</button>
             </div>
         </div>
     </div>

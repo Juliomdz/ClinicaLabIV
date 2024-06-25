@@ -3,7 +3,6 @@
 $font: 'Montserrat', sans-serif;
 
 .background-image {
-  font-family: $font;
   z-index: -1;
   top: 0;
   left: 0;
@@ -15,24 +14,20 @@ $font: 'Montserrat', sans-serif;
   position: fixed;
 }
 
-.tabla-usuario {
+.listado-usuarios {
   font-family: $font;
-  position: absolute;
-  width: 90vw;
-  height: 80vh;
-  overflow-y: scroll;
-  z-index: 100;
-  left: 5%;
-  top: 18%;
-  background: #000;
-  color: #fff;
-  padding: 1rem;
-  background-color: #4b898b;
-  border: 2px solid #fff;
-  box-shadow: 2px 2px 4px #000;
-
+  text-align: center;
+  color: rgb(255, 255, 255);
+  background-color: rgb(106, 178, 180);
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px; 
+  width: 98%;
   h3 {
-    font-family: $font;
     text-align: center;
     margin-bottom: 20px;
     color: #F1FAEE;
@@ -41,30 +36,87 @@ $font: 'Montserrat', sans-serif;
   }
 }
 
-.table {
-  --bs-table-bg:#F1FAEE;
-  --bs-table-color:#0B6E4F;
-  font-weight: bold;
+.texto-perfil {
+  margin-top: 1rem;
+  color: #F1FAEE;
+  width: max-content;
+  display: block;
+  margin: 0 auto;
+  padding: 5px 15px;
+  border-radius: 20px;
 }
 
-.tr-tabla {
-  font-size: 1.2rem;
+.contenedor-cartas{
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: start;
+  align-items: center;
+}
 
-  td {
-    line-height: 7rem;
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 230px;
+  height: 300px;
+  background-color: rgba(204, 8, 8, 0.116);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000;
+}
+
+.carta-historial {
+  h4 {
+      background-color: grey;
+      text-align: start;
+      font-weight: bolder;
+      padding: 1rem;
+  }
+  span {
+      text-decoration: underline;
+      font-weight: bolder;
+      color: black;
+  }
+  p{
+      color: black;
   }
 }
 
-.imagen-usuario {
-  width: 7rem;
-  height: 7rem;
-  border-radius: 30px;
-  border-style: ridge;
-  border-color: #000;
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.user-name {
+.card-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.texto-perfil{
+  width: max-content;
   display: block;
+  margin: 0 auto;
+  background-color: rgba(95, 124, 77, 0.87);
+  box-shadow: 0px 5px 5px rgb(12, 12, 12);
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.imagen-usuario {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border: 1px outset black;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 .opcion-registros {
@@ -82,12 +134,10 @@ $font: 'Montserrat', sans-serif;
   width: 25rem;
   height: 25rem;
   background-color: #F1FAEE;
-
   img {
     margin-top: 0.7rem;
     width: 10rem;
   }
-
   h2 {
     margin-top: 1rem;
     color: #E63946;
@@ -142,41 +192,32 @@ $font: 'Montserrat', sans-serif;
 }
 
 .btn-habilitar {
+  height: 3rem;
   width: 12rem;
   background-color: #00610a;
+  border-radius: 10px;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   cursor: pointer;
-  border: 2px solid #000000;
   transition: 0.4s;
-  text-shadow: 1px 1px 1px #000;
-}
-
-.btn-habilitar span:last-child {
-  display: none;
 }
 
 .btn-habilitar:hover {
   transition: 0.4s;
-  background-color: rgb(0, 255, 0);
+  background-color: rgb(44, 216, 44);
 }
-
 
 .btn-deshabilitar {
+  height:3rem;
   width: 12rem;
-  background-color: #630101;
+  background-color: #E63946;
+  border-radius: 10px;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   cursor: pointer;
-  border: 2px solid #000000;
   transition: 0.4s;
-  text-shadow: 1px 1px 1px #000;
-}
-
-.btn-deshabilitar span:last-child {
-  display: none;
 }
 
 .btn-deshabilitar:hover {
@@ -184,12 +225,31 @@ $font: 'Montserrat', sans-serif;
   background-color: red;
 }
 
+.btn-historial{
+  height:3rem;
+  width: 12rem;
+  background-color: #0B6E4F;
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-historial:hover{
+  transition: 0.4s;
+  background-color: #1c9c74;
+  z-index: 100;
+}
+
 .btn-nuevo-usuario {
   font-family: $font;
   width: 22rem;
   position: absolute;
   z-index: 200;
-  top: 18%;
+  border-radius: 10px;
+  top: 11%;
   left: 5%;
   height: 3rem;
   border: solid 2px #F1FAEE;
@@ -205,12 +265,13 @@ $font: 'Montserrat', sans-serif;
 }
 
 .btn-excel {
-  font-family: 'Raleway', sans-serif;
+  font-family: $font;
   width: 22rem;
   position: absolute;
   z-index: 200;
-  top: 18%;
+  top: 11%;
   right: 5.9%;
+  border-radius: 10px;
   height: 3rem;
   border: solid 2px #F1FAEE;
   background-color: #0B6E4F;

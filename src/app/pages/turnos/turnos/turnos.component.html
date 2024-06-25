@@ -12,7 +12,7 @@
 <div class="turnos">
     <h3>GESTIÓN DE TURNOS</h3>
     <label style="margin-top: 1rem; margin-bottom: 1rem; margin-right: 1rem; font-size: 1.5rem;">Buscar</label>
-    <input class="input-busqueda" type="text" [(ngModel)]="palabraBusqueda" (keyup)="filtrarPorCamposAdministrador()"
+    <input appInputBusqueda type="text" [(ngModel)]="palabraBusqueda" (keyup)="filtrarPorCamposAdministrador()"
         placeholder="Ingresar busqueda..." />
     <!-- LISTA GENERAL DE TURNOS -->
     <div class="tabla-usuario text-focus-in">
@@ -43,28 +43,17 @@
 
                     <td>
                         <button class="btn btn-cancelar" style="box-shadow: 2px 2px 4px #000"
-                            (click)="cancelarTurno(turn)" *ngIf="
-                    turn.estado != 'aceptado' &&
-                    turn.estado != 'realizado' &&
-                    turn.estado != 'rechazado' &&
-                    turn.estado != 'cancelado'
-                  ">
+                            (click)="cancelarTurno(turn)" *ngIf="turn.estado != 'aceptado' && turn.estado != 'realizado' && turn.estado != 'rechazado' && turn.estado != 'cancelado'">
                             Cancelar
                         </button>
                         <button class="btn btn-success btn-confirmar"
                             style="margin-left: 1rem; box-shadow: 2px 2px 4px #000" (click)="confirmarCancelacion(turn)"
-                            *ngIf="
-                    cancelacionTurno &&
-                    turnoACancelar.fecha.seconds == turn.fecha.seconds
-                  ">
+                            *ngIf="cancelacionTurno && turnoACancelar.fecha.seconds == turn.fecha.seconds">
                             Confirmar
                         </button>
                         <br />
                         <input type="text" class="form-control" style="margin-top: 0.5rem"
-                            placeholder="Comentario de cancelación..." [(ngModel)]="comentarioCancelacion" *ngIf="
-                    cancelacionTurno &&
-                    turnoACancelar.fecha.seconds == turn.fecha.seconds
-                  " />
+                            placeholder="Comentario de cancelación..." [(ngModel)]="comentarioCancelacion" *ngIf="cancelacionTurno && turnoACancelar.fecha.seconds == turn.fecha.seconds" />
                     </td>
                 </tr>
             </tbody>

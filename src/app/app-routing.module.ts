@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { seLogueoGuard } from './guard/se-logueo.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path:"turnos",
-    loadChildren:() => import('./pages/turnos/turnos.module').then(m => m.TurnosModule)
+    loadChildren:() => import('./pages/turnos/turnos.module').then(m => m.TurnosModule),
+    canActivate:[seLogueoGuard]
   },
 ];
 

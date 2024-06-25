@@ -90,8 +90,11 @@ export class TurnosComponent {
             t.especialidad == turno.especialidad
           );
         });
-        turnosEspecialista.turnos[index] = turno;
-        this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        if(turnosEspecialista.turnos)
+        {
+          turnosEspecialista.turnos[index] = turno;
+          this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+        }
       }
 
       this.loading = true;
