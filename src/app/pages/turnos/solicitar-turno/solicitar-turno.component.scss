@@ -108,12 +108,15 @@ $font: "Montserrat", sans-serif;
 
 .especialidades {
   width: 500px;
-  height: 15vh;
+  height: 21vh;
   border: 2px solid #fff;
   box-shadow: 2px 2px 4px #000;
   margin-left: 1rem;
+  margin-top: 1rem;
   margin-right: 1rem;
   transition: background 0.5s;
+  text-align: center; // Asegura que el texto dentro de la carta esté centrado
+  
   img {
     margin-top: 0.4rem;
     width: 6rem;
@@ -126,6 +129,13 @@ $font: "Montserrat", sans-serif;
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+  
+  p {
+    margin-top: 0.5rem; // Ajusta el margen superior para centrar el texto respecto a la imagen
+    font-size: 1.5rem; // Ajusta el tamaño de la fuente según tus necesidades
+    font-weight: bold; // Opcional: añade peso a la fuente para mayor visibilidad
+    color: #F18F01;
   }
 }
 
@@ -199,10 +209,6 @@ $font: "Montserrat", sans-serif;
   .carta-especialista {
     background: #4b898b;
     margin-bottom: 2rem;
-  }
-
-  .especialidades {
-    margin-top: 1rem;
   }
 
   .carta-turno {
