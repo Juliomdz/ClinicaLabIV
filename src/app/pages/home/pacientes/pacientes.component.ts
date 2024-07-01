@@ -67,7 +67,7 @@ export class PacientesComponent implements OnInit{
 
           this.historialClinicoDelEspecialista = this.historialesClinicos.filter(
             (h) => {
-              return h.especialista.id == user.id;
+              return h.especialista.id == this.usuario.id;
             }
           );
 
@@ -135,7 +135,8 @@ export class PacientesComponent implements OnInit{
       let turnsLength = turns?.length ?? 0;
       for (let i = 0; i < turnsLength; i++) {
         const turnSpecialist = turns[i].turnos;
-        for (let j = 0; j < turnSpecialist.length; j++) {
+        let turnSpecialistLength = turnSpecialist?.length ?? 0;
+        for (let j = 0; j < turnSpecialistLength; j++) {
           const turn = turnSpecialist[j];
           if (turn.estado !== 'disponible') {
             this.turnList.push(turn);

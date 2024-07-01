@@ -47,3 +47,19 @@ $font: 'Montserrat', sans-serif;
     display: flex;
     justify-content: space-evenly;
 }
+
+.btn-boton{
+    background-color: #22b687;
+    p{
+      color: #E63946;
+    }
+    transition: 0.5s;
+  }
+
+.btn-boton:hover{
+    background-color: #F18F01;
+    p{
+      color: #E63946;
+    }
+    transition: 0.5s;
+  }

@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'horarioTurno'
+  name: 'fechaTurno'
 })
-export class HorarioTurnoPipe implements PipeTransform {
+export class FechaTurnoPipe implements PipeTransform {
 
   private meses: string[] = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -19,11 +19,7 @@ export class HorarioTurnoPipe implements PipeTransform {
     let rtn = '';
     const dia = value.getDate().toString().padStart(2, '0');
     const mes = this.meses[value.getMonth()];
-    const hora = (value.getHours() + 2).toString().padStart(2, '0');
-    const minutos = value.getMinutes().toString().padStart(2, '0');
-
-    //rtn = `${dia} de ${mes} ${hora}:${minutos}`;
-    rtn = `${hora}:${minutos}`; //sprint 2
+    rtn = `${dia} de ${mes}`; //sprint 2
 
     return rtn;
   }

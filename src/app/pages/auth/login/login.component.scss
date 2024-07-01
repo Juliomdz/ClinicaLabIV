@@ -31,11 +31,13 @@ $font: 'Montserrat', sans-serif;
   justify-content: center;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .fab:hover {
   background-color: #f46f27;
+  transform: translateY(-20px);
+  box-shadow: 0 15px 20px rgba(241, 145, 1, 0.57);
 }
 
 .container-inicio-rapido {
@@ -54,6 +56,22 @@ $font: 'Montserrat', sans-serif;
   background-color: #F1FAEE;
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-boton{
+  background-color: #22b687;
+  p{
+    color: #E63946;
+  }
+  transition: 0.5s;
+}
+
+.btn-boton:hover{
+  background-color: #F18F01;
+  p{
+    color: #E63946;
+  }
+  transition: 0.5s;
 }
 
 .mensaje-error{

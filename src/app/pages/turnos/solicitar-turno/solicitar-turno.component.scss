@@ -161,9 +161,27 @@ $font: "Montserrat", sans-serif;
 }
 
 .btn-turnos:hover{
-  background-color: #F1FAEE;
+  background-color: #4fe41d;
   p{
     color: #E63946;
+  }
+  transition: 0.5s;
+}
+
+.btn-back{
+  width: 10rem;
+  height: 3rem;
+  margin: 3px; 
+  background-color: #f15901;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.5s;
+}
+
+.btn-back:hover{
+  background-color: #fc0b0b;
+  p{
+
   }
   transition: 0.5s;
 }
@@ -173,6 +191,8 @@ $font: "Montserrat", sans-serif;
   z-index: 200;
   top: 12%;
   left: 5%;
+  color: #E63946;
+  background-color: #f15901;
 }
 
 .especialista-activo{

@@ -35,6 +35,9 @@ export class SolicitarTurnoComponent implements OnInit{
   diasAMostrar: any[] = [];
   botonPedirTurno: boolean = false;
   turnoSeleccionado: any = null;
+  selectedFecha: Date | null = null;
+  showDays: boolean = true;
+  hideTurns: boolean = true;
 
   constructor(
     public authService:AuthService,
@@ -109,30 +112,28 @@ export class SolicitarTurnoComponent implements OnInit{
     this.patientSelectionMenu = false;
     this.speciality = null;
     this.turnsSelectionMenu = false;
+    this.showDays = true;
+    this.hideTurns = true;
   }
 
   showTurns(especialista: any) {
     this.turnsSelectionMenu = true;
     this.activeEspecialista = especialista;
     this.loadFreeHours('');
+    this.diasAMostrar = [];
     this.turnosAMostrar.forEach((t) => {
-      this.diasAMostrar.push(t.fecha);
+      this.diasAMostrar.push(new Date(t.fecha));
     });
 
     const aux: any[] = [];
-    let diasAMostrarLength = this.diasAMostrar?.length ?? 0;
     this.diasAMostrar.forEach((d) => {
-      for (let i = 0; i < diasAMostrarLength; i++) {
-        const fecha = this.diasAMostrar[i];
-        if (d.getMonth() == fecha.getMonth() && d.getDate() == fecha.getDate()) {
-          if (
-            !aux.some((a) => {
-              return d.getMonth() == a.getMonth() && d.getDate() == a.getDate();
-            })
-          ) {
-            aux.push(d);
-          }
-        }
+      const fecha = new Date(d);
+      if (
+        !aux.some((a) => {
+          return fecha.getMonth() == a.getMonth() && fecha.getDate() == a.getDate();
+        })
+      ) {
+        aux.push(fecha);
       }
     });
 
@@ -140,18 +141,49 @@ export class SolicitarTurnoComponent implements OnInit{
     this.diasAMostrar = [...aux];
   }
 
+  selectFecha(fecha: Date) {
+    this.selectedFecha = fecha;
+    this.showDays = false;
+    this.hideTurns = false;
+  }
+
+  hayTurnos() {
+    if (this.turnosAMostrar?.length > 0 && this.diasAMostrar?.length > 0) {
+      return true;
+    }
+    else{return false;}
+  }
+
+  UnSelectFecha() {
+    this.selectedFecha = null;
+    this.showDays = true;
+    this.hideTurns = true;
+  }
+
+  getFilteredTurnos() {
+    if (!this.selectedFecha) {
+      return [];
+    }
+    return this.turnosAMostrar.filter(t => {
+      const fechaTurno = new Date(t.fecha);
+      return fechaTurno.getMonth() === this.selectedFecha?.getMonth() &&
+             fechaTurno.getDate() === this.selectedFecha?.getDate();
+    });
+  }
+
+
   loadFreeHours(day: string) {
     const currentDate = new Date();
-    const listaTurnosDelEspecialista = this.currentSpecialistTurnList.filter(
-      (t) => t.especialista.email == this.activeEspecialista.email
-    );
+    const listaTurnosDelEspecialista = this.currentSpecialistTurnList?.filter(
+      (t) => t.especialista.email == this.activeEspecialista?.email ?? null
+    ) ?? [];
     const turnosEspecialidad =
-      listaTurnosDelEspecialista[0].turnos.filter((t: any) => {
+      listaTurnosDelEspecialista[0]?.turnos?.filter((t: any) => {
         return (
           t.especialidad == this.speciality.nombre &&
           currentDate.getTime() < new Date(t.fecha.seconds * 1000).getTime()
         );
-      });
+      }) ?? [];
       let turnosEspecialidadLength = turnosEspecialidad?.length ?? 0;
     const turnos15dias: any[] = [];
     for (let i = 0; i < turnosEspecialidadLength; i++) {

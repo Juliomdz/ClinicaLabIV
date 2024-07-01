@@ -13,6 +13,7 @@ import { BotonHoverDirective } from '../directives/boton-hover.directive';
 import { InputBusquedaDirective } from '../directives/input-busqueda.directive';
 import { FechaActualPipe } from '../pipes/fecha-actual.pipe';
 import { HorarioTurnoPipe } from '../pipes/horario-turno.pipe';
+import { FechaTurnoPipe } from '../pipes/fecha-turno.pipe';
 import { DiaTurnoPipe } from '../pipes/dia-turno.pipe';
 import { DniPipe } from '../pipes/dni.pipe';
 import { ComentarioPipe } from '../pipes/comentario.pipe';
@@ -31,6 +32,7 @@ import { TarjetaHoverDirective } from '../directives/tarjeta-hover.directive';
     TarjetaHoverDirective,
     FechaActualPipe,
     HorarioTurnoPipe,
+    FechaTurnoPipe,
     DiaTurnoPipe,
     DniPipe,
     ComentarioPipe
@@ -54,6 +56,7 @@ import { TarjetaHoverDirective } from '../directives/tarjeta-hover.directive';
     InputBusquedaDirective,
     DiaTurnoPipe,
     HorarioTurnoPipe,
+    FechaTurnoPipe,
     FechaActualPipe,
     DniPipe,
     ComentarioPipe

@@ -60,24 +60,42 @@
         <div *ngIf="turnsSelectionMenu">
             <h3>SELECCIÓN DE TURNO</h3>
             <div class="row">
-                <div class="col carta-turno">
-                    <img src="{{ activeEspecialista.fotos[0] }}" alt="imagen" />
-                    <h1 class="especialista-activo">
-                        {{ activeEspecialista.apellido }} {{ activeEspecialista.nombre }} 
-                    </h1>
-                    <h1 class="especialista-activo">{{ speciality.nombre }}</h1>
-                </div>
-                <div class="col turnos-desk" style="overflow-y: scroll; height: 35rem">
-                    <button class="btn btn-turnos" *ngFor="let turno of turnosAMostrar" (click)="SeleccionarTurno(turno)">
-                        <p style="font-size: 15px;">{{ turno.fecha | horarioTurno}}</p>
-                    </button>
+              <div class="col carta-turno">
+                <img src="{{ activeEspecialista.fotos[0] }}" alt="imagen" />
+                <h1 class="especialista-activo">
+                  {{ activeEspecialista.apellido }} {{ activeEspecialista.nombre }} 
+                </h1>
+                <h1 class="especialista-activo">{{ speciality.nombre }}</h1>
+              </div>
+              <div class="col turnos-desk" style="overflow-y: scroll; height: 35rem">
+                <!-- Botones para seleccionar fecha -->
+                <div *ngIf="showDays">
                     <br />
-                    <p *ngIf="diasAMostrar.length == 0" style="text-align: center">
-                        No hay turnos disponibles
-                    </p>
-                </div>
+                    <button class="btn btn-turnos" appBotonHover *ngFor="let dia of diasAMostrar" (click)="selectFecha(dia)">
+                      <p style="font-size: 20px;">{{ dia | fechaTurno }}</p>
+                    </button>
+                    <!-- <br /> -->
+                  </div>
+                
+                <!-- Botones para los turnos del día seleccionado -->
+                <div *ngIf="!hideTurns">
+                    <br />
+                    <button class="btn btn-back" appBotonHover (click)="UnSelectFecha()">
+                        <p style="font-size: 13px;">Elegir otra fecha.</p>
+                      </button>
+                      <br />
+                <button class="btn btn-turnos" appBotonHover *ngFor="let turno of getFilteredTurnos()" (click)="SeleccionarTurno(turno)">
+                  <p style="font-size: 15px;">{{ turno.fecha | horarioTurno }}</p>
+                </button>
+                <br />
             </div>
-        </div>
+                <p *ngIf="!hayTurnos()" style="text-align: center">
+                  No hay turnos disponibles
+                </p>
+              </div>
+            </div>
+          </div>
+
         <button *ngIf="botonPedirTurno" class="btn btn-primary" style="margin-top: 1rem; width: 100%"
             (click)="SolicitarTurno()">
             Solicitar Turno
