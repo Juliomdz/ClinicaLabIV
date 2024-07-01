@@ -180,9 +180,6 @@ $font: "Montserrat", sans-serif;
 
 .btn-back:hover{
   background-color: #fc0b0b;
-  p{
-
-  }
   transition: 0.5s;
 }
 
@@ -193,6 +190,43 @@ $font: "Montserrat", sans-serif;
   left: 5%;
   color: #E63946;
   background-color: #f15901;
+}
+
+.btn-regresar:hover{
+  background-color: #fc0b0b;
+  transition: 0.5s;
+}
+
+.btn-primary{
+  display: block;
+  margin: 1rem auto; /* Centra el botón horizontalmente */
+  width: 80%; /* Ajusta el ancho del botón según sea necesario */
+  max-width: 300px; /* Establece un ancho máximo opcional */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #00448c; /* Cambia el color de fondo */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover{
+  background-color: #1ba000;
+  transition: 0.5s;
+}
+
+.btn-primary-dummy{
+  display: block;
+  margin: 1rem auto; /* Centra el botón horizontalmente */
+  width: 80%; /* Ajusta el ancho del botón según sea necesario */
+  max-width: 300px; /* Establece un ancho máximo opcional */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  //background-color: #999999; /* Cambia el color de fondo */
+  //color: white;
+  background-color: #4b898b;
+  color: #4b898b;
+  transition: background-color 0.3s ease;
 }
 
 .especialista-activo{

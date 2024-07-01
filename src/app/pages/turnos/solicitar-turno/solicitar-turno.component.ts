@@ -158,6 +158,7 @@ export class SolicitarTurnoComponent implements OnInit{
     this.selectedFecha = null;
     this.showDays = true;
     this.hideTurns = true;
+    this.botonPedirTurno = false;
   }
 
   getFilteredTurnos() {

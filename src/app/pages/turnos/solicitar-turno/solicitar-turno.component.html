@@ -67,7 +67,7 @@
                 </h1>
                 <h1 class="especialista-activo">{{ speciality.nombre }}</h1>
               </div>
-              <div class="col turnos-desk" style="overflow-y: scroll; height: 35rem">
+              <div class="col turnos-desk" style="overflow-y: scroll; height: 30rem">
                 <!-- Botones para seleccionar fecha -->
                 <div *ngIf="showDays">
                     <br />
@@ -95,11 +95,17 @@
               </div>
             </div>
           </div>
-
-        <button *ngIf="botonPedirTurno" class="btn btn-primary" style="margin-top: 1rem; width: 100%"
+          <div *ngIf="turnsSelectionMenu">
+              <button *ngIf="!botonPedirTurno" class="btn btn-primary-dummy"
+              style="margin-top: 1rem; width: 100%">
+              Solicitar Turno
+            </button>
+            <button *ngIf="botonPedirTurno" class="btn btn-primary" appBotonHover
+            style="margin-top: 1rem; width: 100%"
             (click)="SolicitarTurno()">
             Solicitar Turno
-        </button>
+            </button>
+        </div>
     </div>
     <button class="btn btn-regresar" appBotonHover *ngIf="!especialidadMenuSeleccion || speciality" (click)="VolverALasEspecialidades()">Volver a Especialidades</button>
 </div>
