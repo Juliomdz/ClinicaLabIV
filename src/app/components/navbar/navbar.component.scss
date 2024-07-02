@@ -8,6 +8,19 @@ $font: "Lato", sans-serif;
   font-family: $font;
 }
 
+.background-image {
+  font-family: $font;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/fondos/home.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+}
+
 .btn-nav {
   color: white;
   text-decoration: none;
