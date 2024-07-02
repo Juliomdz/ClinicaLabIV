@@ -50,11 +50,21 @@ export class FirestoreService {
       });
   }
 
+  // ActualizarListadoTurnos(turno: any) {
+  //   this.angularFirestore
+  //     .doc<any>(`turnos/${turno.id}`)
+  //     .update(turno)
+  //     .then(() => { })
+  // }
+  
   ActualizarListadoTurnos(turno: any) {
     this.angularFirestore
       .doc<any>(`turnos/${turno.id}`)
-      .update(turno)
+      .update({ turnos: turno.turnos })
       .then(() => { })
+      .catch((error) => {
+        console.error("Error actualizando el turno: ", error);
+      });
   }
 
   ObtenerListadoTurnos() {
@@ -89,5 +99,9 @@ export class FirestoreService {
   {
     const collection = this.angularFirestore.collection<any>('historialesClinicos');
     return collection.valueChanges();
+  }
+
+  ActualizarTurno(id: string, turno: any) {
+    return this.angularFirestore.collection('turnos').doc(id).update(turno);
   }
 }

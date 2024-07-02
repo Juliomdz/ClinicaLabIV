@@ -16,7 +16,7 @@
             <div class="carta-especialista btn-fav" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 *ngFor="let pac of pacientesAtendidos">
                 <div (click)="VerHistorialPaciente(pac)">
-                    <img src="{{ pac.fotos[0] }}" alt="imagen" />
+                    <img class="paciente-img" src="{{ pac.fotos[0] }}" alt="imagen" />
                     <p>{{ pac.nombre }} {{ pac.apellido }}</p>
                 </div>
             </div>

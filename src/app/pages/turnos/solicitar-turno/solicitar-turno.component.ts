@@ -204,59 +204,116 @@ export class SolicitarTurnoComponent implements OnInit{
   SeleccionarTurno(turno: any) {
     this.turnoSeleccionado = turno;
     this.botonPedirTurno = true;
+    console.log(turno);
     this.notificationService.showInfo('Se ha seleccionado un turno', 'Turnos');
   }
-
   SolicitarTurno() {
     if (this.esPaciente) {
       this.turnoSeleccionado.paciente = this.usuario;
-      this.turnoSeleccionado.estado = 'solicitado';
     } else {
       this.turnoSeleccionado.paciente = this.activePaciente;
-      this.turnoSeleccionado.estado = 'solicitado';
     }
-    console.log('159');
-    let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
-    let flagTurnoPedido:boolean = false;
-
-    for (let i = 0; i < currentSpecialistTurnListLength; i++) {
-      console.log('163');
-      console.log(this.turnoSeleccionado);
+    this.turnoSeleccionado.estado = 'solicitado';
+  
+    let flagTurnoPedido = false;
+  
+    for (let i = 0; i < this.currentSpecialistTurnList.length; i++) {
       const turnosEspecialista = this.currentSpecialistTurnList[i];
+  
       if (turnosEspecialista.turnos != undefined) {
-      const index = turnosEspecialista.turnos.findIndex((t: any) => {
-        return (
-          //new Date(t.fecha.seconds * 1000).getTime() ==
-          this.turnoSeleccionado.fecha.getTime() &&
-          t.especialidad == this.turnoSeleccionado.especialidad
-        );
-      });
-      turnosEspecialista.turnos[index] = this.turnoSeleccionado;
-      this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
-      flagTurnoPedido = true;
+        const index = turnosEspecialista.turnos.findIndex((t: any) => {
+          // Asegúrate de que ambas fechas estén en el mismo formato
+          const turnoFecha = new Date(t.fecha.seconds ? t.fecha.seconds * 1000 : t.fecha);
+          const seleccionadoFecha = new Date(this.turnoSeleccionado.fecha);
+  
+          return (
+            turnoFecha.getTime() === seleccionadoFecha.getTime() &&
+            t.especialidad === this.turnoSeleccionado.especialidad
+          );
+        });
+  
+        if (index !== -1) {
+          turnosEspecialista.turnos[index] = this.turnoSeleccionado;
+          this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+          flagTurnoPedido = true;
+          break; // Sal del bucle una vez que hayas encontrado y actualizado el turno
+        }
+      }
     }
-    }
+  
     this.turnosAMostrar = [];
     this.turnosDeUnDiaAMostrar = [];
     this.botonPedirTurno = false;
     this.loading = true;
-
+  
     if (flagTurnoPedido) {
       this.swal.MostrarExito(
         "EXITO",
-        'Se solicitó el turno correctamente. '
+        'Se solicitó el turno correctamente.'
       );
       setTimeout(() => {
         this.loading = false;
         this.notificationService.showSuccess('Se ha solicitado el turno exitosamente', 'Turnos');
         this.loadFreeHours('');
       }, 1000); //REVISAR
-      this.router.navigate(['turnos/mis-turnos'])
+      this.router.navigate(['turnos/mis-turnos']);
     } else {
       this.swal.MostrarError(
         "ERROR",
         "Hubo un problema al solicitar el turno"
       );
     }
-    }
+  }
+  // SolicitarTurno() {
+  //   if (this.esPaciente) {
+  //     this.turnoSeleccionado.paciente = this.usuario;
+  //     this.turnoSeleccionado.estado = 'solicitado';
+  //   } else {
+  //     this.turnoSeleccionado.paciente = this.activePaciente;
+  //     this.turnoSeleccionado.estado = 'solicitado';
+  //   }
+  //   console.log('159');
+  //   let currentSpecialistTurnListLength = this.currentSpecialistTurnList?.length ?? 0;
+  //   let flagTurnoPedido:boolean = false;
+
+  //   for (let i = 0; i < currentSpecialistTurnListLength; i++) {
+  //     console.log('163');
+  //     console.log(this.turnoSeleccionado);
+  //     const turnosEspecialista = this.currentSpecialistTurnList[i];
+  //     if (turnosEspecialista.turnos != undefined) {
+  //     const index = turnosEspecialista.turnos.findIndex((t: any) => {
+  //       return (
+  //         //new Date(t.fecha.seconds * 1000).getTime() ==
+  //         this.turnoSeleccionado.fecha.getTime() &&
+  //         t.especialidad == this.turnoSeleccionado.especialidad
+  //       );
+  //     });
+  //     turnosEspecialista.turnos[index] = this.turnoSeleccionado;
+  //     this.firestoreService.ActualizarListadoTurnos(turnosEspecialista);
+  //     flagTurnoPedido = true;
+  //   }
+  //   }
+  //   this.turnosAMostrar = [];
+  //   this.turnosDeUnDiaAMostrar = [];
+  //   this.botonPedirTurno = false;
+  //   this.loading = true;
+
+  //   if (flagTurnoPedido) {
+  //     this.swal.MostrarExito(
+  //       "EXITO",
+  //       'Se solicitó el turno correctamente. '
+  //     );
+  //     setTimeout(() => {
+  //       this.loading = false;
+  //       this.notificationService.showSuccess('Se ha solicitado el turno exitosamente', 'Turnos');
+  //       this.loadFreeHours('');
+  //     }, 1000); //REVISAR
+  //     this.router.navigate(['turnos/mis-turnos'])
+  //   } else {
+  //     this.swal.MostrarError(
+  //       "ERROR",
+  //       "Hubo un problema al solicitar el turno"
+  //     );
+  //   }
+  //   }
   }

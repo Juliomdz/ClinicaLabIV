@@ -153,7 +153,7 @@ export class PacientesComponent implements OnInit{
       let auxPacientesDelEspecialistaLength = this.auxPacientesDelEspecialista?.length ?? 0;
       for (let i = 0; i < auxPacientesDelEspecialistaLength; i++) {
         const paciente = this.auxPacientesDelEspecialista[i];
-        const index = this.pacientesDelEspecialista.findIndex((p: any) => paciente.id === p.id);
+        const index = this.pacientesDelEspecialista?.findIndex((p: any) => paciente.id === p.id);
         if (index === -1) {
           this.pacientesDelEspecialista.push(paciente);
         }

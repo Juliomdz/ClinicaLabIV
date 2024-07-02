@@ -38,6 +38,12 @@ $font: 'Montserrat', sans-serif;
     }
 }
 
+.paciente-img {
+    width: 120px; // Puedes ajustar estos valores según tus necesidades
+    height: 120px; // Puedes ajustar estos valores según tus necesidades
+    object-fit: cover; // Esto asegura que la imagen se recorte y se ajuste al contenedor
+}
+
 .carta-historial {
     h4 {
         background-color: grey;
@@ -83,7 +89,7 @@ $font: 'Montserrat', sans-serif;
         color: #fff;
         font-weight: bolder;
         text-shadow: 1px 1px #000;
-        margin-top: 1rem;
+        margin-top: 0.4rem;
     }
 }
 
