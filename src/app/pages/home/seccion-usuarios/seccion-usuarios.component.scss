@@ -50,22 +50,53 @@ $font: 'Montserrat', sans-serif;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  justify-content: start;
+  //margin-left: 8rem;
+  justify-content: center;
   align-items: center;
 }
+
+// .card {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   width: 230px;
+//   height: 300px;
+//   background-color: rgba(204, 8, 8, 0.116);
+//   backdrop-filter: blur(10px);
+//   overflow: hidden;
+//   border-radius: 10px;
+//   box-shadow: 1px 1px 1px #000;
+// }
 
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 230px;
-  height: 300px;
+  width: 300px;
+  height: 300px; // altura y anchura iguales
   background-color: rgba(204, 8, 8, 0.116);
   backdrop-filter: blur(10px);
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 50%; // borde redondeado para hacerlas circulares
   box-shadow: 1px 1px 1px #000;
 }
+
+// .imagen-usuario {
+//   width: 100px;
+//   height: 100px;
+//   object-fit: cover;
+//   border-radius: 50%; // borde redondeado para hacer la imagen circular
+// }
+
+.imagen-usuario {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border: 1px outset black;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+
 
 .carta-historial {
   h4 {
@@ -96,28 +127,20 @@ $font: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .texto-perfil{
   width: max-content;
   display: block;
-  margin: 0 auto;
+  margin-top: 1rem;
+
   background-color: rgba(95, 124, 77, 0.87);
   box-shadow: 0px 5px 5px rgb(12, 12, 12);
-  padding: 5px 15px;
+  padding: 10px 15px;
   border-radius: 20px;
 }
 
-.imagen-usuario {
-  width: 6rem;
-  height: 6rem;
-  object-fit: cover;
-  border: 1px outset black;
-  margin-bottom: 1rem;
-  margin-left: 0.5rem;
-}
 
 .opcion-registros {
   z-index: 100;
@@ -193,7 +216,8 @@ $font: 'Montserrat', sans-serif;
 
 .btn-habilitar {
   height: 3rem;
-  width: 12rem;
+  width: 10rem;
+  margin-top: -1rem;
   background-color: #00610a;
   border-radius: 10px;
   color: #fff;
@@ -209,8 +233,9 @@ $font: 'Montserrat', sans-serif;
 }
 
 .btn-deshabilitar {
-  height:3rem;
-  width: 12rem;
+  height: 3rem;
+  width: 10rem;
+  margin-bottom: 100px;
   background-color: #E63946;
   border-radius: 10px;
   color: #fff;
@@ -227,7 +252,7 @@ $font: 'Montserrat', sans-serif;
 
 .btn-historial{
   height:3rem;
-  width: 12rem;
+  width: 10rem;
   background-color: #0B6E4F;
   border-radius: 10px;
   color: #fff;
@@ -249,7 +274,7 @@ $font: 'Montserrat', sans-serif;
   position: absolute;
   z-index: 200;
   border-radius: 10px;
-  top: 11%;
+  top: 13%;
   left: 5%;
   height: 3rem;
   border: solid 2px #F1FAEE;
@@ -269,7 +294,7 @@ $font: 'Montserrat', sans-serif;
   width: 22rem;
   position: absolute;
   z-index: 200;
-  top: 11%;
+  top: 13%;
   right: 5.9%;
   border-radius: 10px;
   height: 3rem;

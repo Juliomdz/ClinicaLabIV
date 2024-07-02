@@ -10,14 +10,14 @@
     </div>
 </div>
 <div class="background-image"></div>
-<div style="padding-top: 10rem;" *ngIf="!createrUserMenu">
+<div style="padding-top: 1rem;" *ngIf="!createrUserMenu">
     <div class="listado-usuarios">
         <h3>Listado de Usuarios</h3>
         <div class="contenedor-cartas">
             <div *ngFor="let usuario of listadoUsuarios">
                 <div class="card" appTarjetaHover style="margin:10px;" (click)="VerTurnosPaciente(usuario)">
                     <div class="card-content">
-                        <span class="texto-perfil" style="text-transform: upperCase; font-weight: bolder; margin-bottom: 15px;">
+                        <span class="texto-perfil" style="text-transform: upperCase; font-weight: bolder;">
                             <span *ngIf="usuario.perfil == 'Administrador'">Administrador</span>
                             <span *ngIf="usuario.perfil == 'Paciente'">Paciente</span>
                             <span *ngIf="usuario.perfil == 'Especialista'">Especialista</span>
@@ -50,7 +50,7 @@
     REGISTRAR USUARIO
 </button>
 
-<button class="btn-habilitar btn-excel" *ngIf="!createrUserMenu" (click)="DescargarExcel()">
+<button class="btn-excel" *ngIf="!createrUserMenu" (click)="DescargarExcel()">
   Descargar Excel
 </button>
 

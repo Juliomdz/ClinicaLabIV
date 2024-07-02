@@ -15,6 +15,11 @@ $font: 'Montserrat', sans-serif;
     position: fixed;
 }
 
+.perfil-content {
+    position: relative;
+    top: 300px; /* Ajusta este valor según la altura de tu navbar */
+  }
+
 
 .perfil-usuario,
 .perfil-especialista {

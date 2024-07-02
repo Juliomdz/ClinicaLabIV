@@ -16,7 +16,7 @@
             <div class="row" style="overflow-x: scroll">
                 <div class="col carta-pacientes mb-2" style="cursor: pointer;" *ngFor="let pac of pacientesList" (click)="MostrarPaciente(pac)">
                     <p>{{ pac.nombre }} - {{ pac.apellido }}</p>
-                    <img [src]="pac?.fotos[0]" style="width: 15rem; height: 15rem; display: flex; justify-content: center; border-radius: 50%;">
+                    <img [src]="pac?.fotos[0]" >
                 </div>
             </div>
         </div>

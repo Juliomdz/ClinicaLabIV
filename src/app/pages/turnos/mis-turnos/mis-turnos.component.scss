@@ -52,6 +52,11 @@ $font: "Montserrat", sans-serif;
   }
 }
 
+.mis-turnos-content {
+  position: relative;
+  top: 5px; /* Ajusta este valor según la altura de tu navbar */
+}
+
 .btn-boton{
   background-color: #22b687;
   p{

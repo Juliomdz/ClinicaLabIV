@@ -5,11 +5,23 @@ import { NotificationService } from 'app/services/notification.service';
 import { SwalService } from 'app/services/swal.service';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
-  styleUrls: ['./mi-perfil.component.scss']
+  styleUrls: ['./mi-perfil.component.scss'],
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('0.7s ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        animate('0.7s ease-in', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class MiPerfilComponent implements OnInit {
   usuario: any = null;

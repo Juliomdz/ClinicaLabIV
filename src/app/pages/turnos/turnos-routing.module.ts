@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path:"mis-turnos",
     component:MisTurnosComponent,
-    canActivate:[seLogueoGuard]
+    canActivate:[seLogueoGuard],
+    data: { animation: 'mis-turnos' }
   },
   {
     path:"solicitar-turno",

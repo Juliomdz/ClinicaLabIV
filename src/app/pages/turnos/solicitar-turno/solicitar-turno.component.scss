@@ -45,7 +45,30 @@ $font: "Montserrat", sans-serif;
   }
 }
 
-.carta-pacientes,
+.carta-pacientes{
+  height: 37vh;
+  border: 2px solid black;
+  background: #F1FAEE;
+  box-shadow: 2px 2px 4px #000;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  img {
+    margin-top: 1rem;
+    width: 12rem;
+    height: 12rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  p {
+    text-align: center;
+    color: #0B6E4F;
+    font-size: 2rem;
+    text-shadow: 1px 1px #000;
+    margin-top: 0.2rem;
+  }
+}
+
 .carta-turno {
   height: 37vh;
   border: 2px solid black;

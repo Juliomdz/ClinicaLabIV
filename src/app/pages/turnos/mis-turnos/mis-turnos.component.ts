@@ -4,12 +4,23 @@ import { NotificationService } from 'app/services/notification.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';  //Historial clinico
 import { FirestoreService } from 'app/services/firestore.service';
 import { SwalService } from 'app/services/swal.service';
-
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-mis-turnos',
   templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.scss']
+  styleUrls: ['./mis-turnos.component.scss'],
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('0.7s ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        animate('0.7s ease-in', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class MisTurnosComponent implements OnInit {
 

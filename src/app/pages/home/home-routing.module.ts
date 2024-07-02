@@ -20,7 +20,8 @@ const routes: Routes = [
   {
     path:'perfil',
     component:MiPerfilComponent,
-    canActivate:[seLogueoGuard]
+    canActivate:[seLogueoGuard],
+    data: { animation: 'Perfil' }
   },
   {
     path:"pacientes",
